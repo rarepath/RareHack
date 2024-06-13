@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediChat</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="sidebar">
+            <div class="logo">MediChat</div>
+            <div class="user-profile">
+                {% if current_user.is_authenticated %}
+                {% set initials = current_user.username.split(' ') %}
+                <div class="avatar">{{ initials[0][0] }}{{ initials[-1][0] }}</div>
+                <div class="user-name">{{ current_user.username }}</div>
+                {% else %}
+                    <div class="avatar">Guest</div>
+                    <div class="user-name">Guest User</div>
+                {% endif %}
+
+            </div>
+            <div class="options">
+                <button id="new-chat-btn" class="new-chat-btn">New Chat</button>
+            </div>
+        </div>
+        <div class="chat-area">
+            <div class="login">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+            </div>
+            <div class="greeting1">Hi! How can I help you today?</div>
+            <div class="greeting">Here are some examples of questions you can ask me:</div>
+            <div class="ex">
+                    
+                <div class="example-input-container">
+                    <div class="example-input">What are the symptoms of diabetes?</div>
+                    <div class="example-input">How can I lower my blood pressure?</div>
+                </div>
+                <div class="example-input-container">
+                    <div class="example-input">What are the risk factors for heart disease?</div>
+                    <div class="example-input">How can I improve my sleep quality?</div>
+                </div>
+            </div>
+            <div class="chat-box" id="chat-box"></div>
+            <div class="user-input">
+                <input type="text" id="user-input" class="message-input" placeholder="Type your message...">
+                <button id="send-btn">Send</button>
+            </div>
+            <div class="typing-dots" id="typing-dots"></div>
+        </div>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+</html>

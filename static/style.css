@@ -1,0 +1,268 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.answer {
+    display: none;
+    font-size: 20px;
+    margin-left: 30px;
+    margin: 15px;
+}
+
+.answer.show {
+    display: block;
+}
+
+.question {
+    cursor: pointer;
+    margin-bottom: 20px;
+    color: rgb(144, 144, 144);
+}
+
+.question:hover {
+    color: white; /* Change color to indicate it's clickable */
+    font-size: larger;
+}
+
+.settings, .past-chats, h1 {
+    text-align: center;
+    justify-content: center;
+}
+
+.delete-data-btn, .delete-account-btn {
+    text-align: center;
+    margin-left: 400px;
+    margin-top: 75px;
+}
+
+.intro {
+    text-align: center;
+    margin-top: 100px;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    padding-left: 150px;
+    font-size: large;
+}
+
+.intro1 {
+    margin-bottom: 20px; /* Add some spacing between paragraphs */
+}
+
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.delete-data-btn, .delete-account-btn {
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px; /* Add equal spacing between buttons */
+    background-color: #005d96;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.ex {
+    display: flex;
+    text-align: center;
+    margin: auto; 
+}
+
+.greeting1 {
+    text-align: center;
+    margin: 10px;
+    margin-top: 200px;
+    font-size: xx-large;
+}
+
+.greeting {
+    text-align: center;
+    margin: 10px;
+}
+
+.example-input {
+    border: 2px solid black;
+    display: flex;
+    text-align: center;
+    margin: 10px; 
+    padding: 10px; 
+    border-radius: 10px;
+    background-color: black;
+    justify-content: center;
+}
+
+.sidebar {
+    width: 20%;
+    height: 100%;
+    background-color: #001f3f;
+    color: #fff;
+    padding: 20px;
+    position: relative;
+    height: auto;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Add this CSS to your style.css file */
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.login a {
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+}
+
+.login {
+    margin-left: auto;
+}
+
+.login a:hover {
+    font-size: xx-large;
+    color: purple;
+}
+
+
+.user-profile {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-direction: column; /* Align elements vertically */
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    margin-bottom: 10px;
+    border: 2px solid white;
+    background-color: black;
+    justify-content: center;
+}
+
+.user-name {
+    margin-bottom: 10px;
+}
+
+
+.options {
+    margin-top: 20px;
+}
+
+/* Add this CSS to your style.css file */
+
+
+
+
+.new-chat-btn, .profile-settings-btn, .about, .howto, .home, .past-conversations-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px; /* Add equal spacing between buttons */
+    background-color: #005d96;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.howtouse, .settingss {
+    text-align: center;
+    justify-content: center;
+}
+
+ul {
+    list-style: none;
+    font-size: x-large;
+    text-align: left;
+
+}
+
+
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.chat-box {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.user-input {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.message-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+#send-btn {
+    padding: 10px;
+    background-color: #005d96;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.typing-dots {
+    display: none;
+    margin-bottom: 10px;
+}
+
+.typing-dots::after {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: #fff;
+    margin-left: 2px;
+    animation: typing 1s infinite;
+}
+
+@keyframes typing {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
