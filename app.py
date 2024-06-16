@@ -146,26 +146,26 @@ def get_response():
         return jsonify({'error': str(e)})
 
 # Define function to get chatbot response
-def get_chatbot_response(message):
-    try:
-        response = openai.chat.completions.create(
-            model="ft:gpt-3.5-turbo-0613:personal::8sFU1bio",
-            messages=[
-                {"role": "system", "content": "You are chatting with a medical chatbot."},
-                {"role": "user", "content": message}
-            ],
-            temperature=0.7,
-            max_tokens=500
-        )
-        api_response = response.to_dict()
-        chatbot_message = response.choices[0].message.content
+# def get_chatbot_response(message):
+#     try:
+#         response = openai.chat.completions.create(
+#             model="gpt-3.5-turbo",
+#             messages=[
+#                 {"role": "system", "content": "You are chatting with a medical chatbot."},
+#                 {"role": "user", "content": message}
+#             ],
+#             temperature=0.7,
+#             max_tokens=500
+#         )
+#         api_response = response.to_dict()
+#         chatbot_message = response.choices[0].message.content
         
-        if not chatbot_message:
-            chatbot_message = "I'm sorry, but I couldn't generate a complete response. Could you please provide more details or try asking a more specific question?"
+#         if not chatbot_message:
+#             chatbot_message = "I'm sorry, but I couldn't generate a complete response. Could you please provide more details or try asking a more specific question?"
         
-        return chatbot_message, api_response
-    except Exception as e:
-        return str(e), None
+#         return chatbot_message, api_response
+#     except Exception as e:
+#         return str(e), None
 
 if __name__ == '__main__':
     app.run(debug=True)
