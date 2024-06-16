@@ -1,1 +1,0 @@
-chroma run --path chromadb
