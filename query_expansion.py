@@ -37,7 +37,7 @@ def get_expanded_queries(question):
             ("human", f"{question}"),
         ]
     )
-    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0)
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
     llm_with_tools = llm.bind_tools([ParaphrasedQuery])
     query_analyzer = prompt | llm_with_tools | PydanticToolsParser(tools=[ParaphrasedQuery])
 
@@ -54,11 +54,11 @@ def get_expanded_queries(question):
 
     return expanded_queries
 
-# Example usage:
-question = "what are the symptoms of hypophosphatasia?"
-expanded_queries = get_expanded_queries(question)
+# # Example usage:
+# question = "what are the symptoms of hypophosphatasia?"
+# expanded_queries = get_expanded_queries(question)
 
-# Print the expanded queries
-print("Expanded Queries:")
-for query in expanded_queries:
-    print(query)
+# # Print the expanded queries
+# print("Expanded Queries:")
+# for query in expanded_queries:
+#     print(query)

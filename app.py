@@ -7,6 +7,9 @@ import openai
 import logging
 from flask_migrate import Migrate
 
+# Import the functions from query_expansion.py
+from query_expansion import get_expanded_queries
+
 
 
 # Add this line at the beginning of your app.py file to configure logging
@@ -128,28 +131,57 @@ def index():
 @app.route('/get_response', methods=['POST'])
 def get_response():
     try:
-        user_input = request.json['message']
-        chatbot_response, api_response = get_chatbot_response(user_input)
+        user_query = request.json['message']
+        #QUERY EXPANSION
+        expanded_queries = get_expanded_queries(user_query)
+        print(expanded_queries)    
+        # Get database documents
+        documents = get_documents(expanded_queries)
+        # RERANKER
+        # reranked_documents = rerank_documents(documents, user_query)
 
-        # Store conversation in the database
-        if current_user.is_authenticated:
-            conversation = PastConversation(
-                user_id=current_user.id,
-                user_message=user_input,
-                chatbot_response=chatbot_response
-            )
-            db.session.add(conversation)
-            db.session.commit()
+        #create a query object with the user query and the reranked documents
+        #GET CHATBOT RESPONSE 
+        
 
-        return jsonify({'response': chatbot_response, 'api_response': api_response})
-    except Exception as e:
-        return jsonify({'error': str(e)})
+
+        chatbot_response, api_response = get_chatbot_response(user_query)
+
+        
+        # HALLUCINATION GRADING
+
+        #IF HALLUCINATION IS DETECTED then return the hallucination message 
+        #ELSE return chatbot response
+
+
+
+
+        
+
+# def get_response():
+#     try:
+#         user_input = request.json['message']
+#         chatbot_response, api_response = get_chatbot_response(user_input)
+
+#         # Store conversation in the database
+#         if current_user.is_authenticated:
+#             conversation = PastConversation(
+#                 user_id=current_user.id,
+#                 user_message=user_input,
+#                 chatbot_response=chatbot_response
+#             )
+#             db.session.add(conversation)
+#             db.session.commit()
+
+#         return jsonify({'response': chatbot_response, 'api_response': api_response})
+#     except Exception as e:
+#         return jsonify({'error': str(e)})
 
 # Define function to get chatbot response
 def get_chatbot_response(message):
     try:
         response = openai.chat.completions.create(
-            model="ft:gpt-3.5-turbo-0613:personal::8sFU1bio",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are chatting with a medical chatbot."},
                 {"role": "user", "content": message}
