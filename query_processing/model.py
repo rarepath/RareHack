@@ -15,20 +15,21 @@ class LLamaModel(LanguageModel):
         outputs = self.model.generate(**inputs)
         return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
     
-
+'''quantize_dynamic(
+        model,  # the original model
+        {torch.nn.Linear},  # a set of layers to quantize
+        dtype=torch.qint8  # the target data type
+    )    
+'''
 
 model = AutoModelForCausalLM.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-if model_quantization:
-    quantized_model = quantize_dynamic(
-        model,  # the original model
-        {torch.nn.Linear},  # a set of layers to quantize
-        dtype=torch.qint8  # the target data type
-    )
-else:
-    quantized_model = model
 
-model = LLamaModel(quantized_model, tokenizer)
+
+llama_model = LLamaModel(model, tokenizer)
+
+print(llama_model.generate("What are the symptoms of hypophosphatasia?"))
+
 
 
