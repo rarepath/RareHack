@@ -14,6 +14,30 @@ class ParaphrasedQuery(BaseModel):
         description="A unique paraphrasing of the original question.",
     )
 
+def decorate_query(query):
+    """Decorate the query by expanding any abbreviations."""
+    system = """You are an expert at converting abbreviations in a user query to their full forms.\
+        Remember that the abbrevations are always related to the diseases Hypophosphatasia and ehler's danlos syndrome.\
+        Substitute the full form in the original query.
+        \
+        \
+        Do not answer the query."""
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", system),
+            ("user", f"{query}"),
+        ]
+    )
+    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.2)
+
+    query_abbv = prompt | llm 
+    result = query_abbv.invoke(
+        {
+            "query": query
+        }
+    )
+    return result.content
+
 def get_expanded_queries(question):
     system = """You are an expert at converting user questions into database queries. \
     You have access to a database of documents about a hypophosphatasia and ehler's danlos syndrome. \
@@ -37,7 +61,7 @@ def get_expanded_queries(question):
             ("human", f"{question}"),
         ]
     )
-    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.0)
+    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.5)
     llm_with_tools = llm.bind_tools([ParaphrasedQuery])
     query_analyzer = prompt | llm_with_tools | PydanticToolsParser(tools=[ParaphrasedQuery])
 
@@ -62,3 +86,6 @@ def get_expanded_queries(question):
 # print("Expanded Queries:")
 # for query in expanded_queries:
 #     print(query)
+
+# decorated_query = decorate_query("What role does TNSALP have in the body?")
+# print(decorated_query)

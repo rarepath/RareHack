@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, s
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from query_processor import process_query
 import os
 import openai
 import logging
@@ -129,7 +130,8 @@ def index():
 def get_response():
     try:
         user_input = request.json['message']
-        chatbot_response, api_response = get_chatbot_response(user_input)
+        # chatbot_response, api_response = get_chatbot_response(user_input)
+        gpt_response, llama_response = process_query(user_input)
 
         # Store conversation in the database
         if current_user.is_authenticated:

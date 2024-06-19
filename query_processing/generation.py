@@ -2,7 +2,7 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 import openai
 from langchain_openai import ChatOpenAI
-from model import llama_model
+from langchain_community.llms import Ollama
 
 # Prompt
 prompt = PromptTemplate(
@@ -16,7 +16,7 @@ prompt = PromptTemplate(
     input_variables=["question", "document"],
 )
 
-llm = llama_model
+llm = Ollama(model="llama3:8b", temperature=0.3)
 
 
 generation = prompt | llm
@@ -38,11 +38,11 @@ def generate(query, context):
             "role": "user", 
             "content": f'Question: {query} Context: {context}' }
     ],
-    temperature=0.7,
+    temperature=0.3,
     max_tokens=500
 )
-    api_response = openai_response.to_dict()
-    gpt_response = api_response.choices[0].message.content
+
+    gpt_response = openai_response.choices[0].message.content
 
     if not gpt_response:
         gpt_response = "I'm sorry, but I couldn't generate a complete response. Could you please provide more details or try asking a more specific question?"

@@ -17,17 +17,18 @@ class MaxSimReranker:
             max_similarities.append(max_similarity)
         return torch.sum(torch.stack(max_similarities))
 
-    def rank_documents(self, query_embeddings, documents):
+    def rank_documents(self, query, documents):
+        query_embeddings = embed_query(query)
+        query_embeddings = torch.tensor([query_embeddings], dtype=torch.float32)
+
         scores = []
         for doc in documents['embeddings'][0]:
-            print(len(doc))
             doc_embeddings = torch.tensor(doc, dtype=torch.float32)  # Match data types
-            print(doc_embeddings.shape )
             score = self.max_sim(query_embeddings, doc_embeddings)
             scores.append(score.item())
 
         ranked_indices = torch.argsort(torch.tensor(scores), descending=True)
-        print(ranked_indices)   
+        print(scores)   
         return [documents['documents'][0][i] for i in ranked_indices]
 
 # Initialize the reranker
