@@ -3,36 +3,52 @@ from langchain_core.prompts import PromptTemplate
 import openai
 from langchain_openai import ChatOpenAI
 from langchain_community.llms import Ollama
+from model import llama_hf
 
 # Prompt
+
+    # template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> You are an assistant for medical question-answering tasks about two rare diseases, Hypophosphatasia and Ehler-Danlos Syndrome. 
+    # You have access to a database of medical documents ralated to the question they ask for context and only have the ability to answer questions based on the context provided.
+    # Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. 
+    # Use three sentences maximum and keep the answer concise <|eot_id|><|start_header_id|>user<|end_header_id|>
+    # Question: {question} 
+    # Context: {context} 
+    # Answer: <|eot_id|><|start_header_id|>assistant<|end_header_id|>""",
+
+
 prompt = PromptTemplate(
-    template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> You are an assistant for medical question-answering tasks about two rare diseases, Hypophosphatasia and Ehler-Danlos Syndrome. 
-    You have access to a database of medical documents ralated to the question they ask for context and only have the ability to answer questions based on the context provided.
-    Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. 
-    Use three sentences maximum and keep the answer concise <|eot_id|><|start_header_id|>user<|end_header_id|>
-    Question: {question} 
-    Context: {context} 
-    Answer: <|eot_id|><|start_header_id|>assistant<|end_header_id|>""",
-    input_variables=["question", "document"],
+
+    template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|>You are an expert in Question and Answering tasks specifically regarding rare diseases, focusing on Hypophosphatasia and Ehlers-Danlos Syndrome. 
+    You will be given relevant context to answer user queries. 
+    Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
+    Do not mention in your response that you were given context. Do not reference the context in your response at all. <|eot_id|><|start_header_id|>user<|end_header_id|>
+    Context: {context}
+    User Query: {question}
+    Response: <|eot_id|><|start_header_id|>assistant<|end_header_id|>""",
+
+
+    input_variables=["question", "context"],
 )
 
-llm = Ollama(model="llama3:8b", temperature=0.3)
+llm = llama_hf
 
 
-generation = prompt | llm
+llama_generation = prompt | llm
 
 def generate(query, context):
-    llama_response = generation.invoke({"question": query, "context": context})
+    llama_response = llama_generation.invoke({"question": query, "context": context})
 
     openai_response = openai.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model="gpt-4o",
     messages=[
         {
             "role": "system", 
-            "content": """You are an assistant for medical question-answering tasks about two rare diseases, Hypophosphatasia and Ehler-Danlos Syndrome. 
-                        You have access to a database of medical documents ralated to the question they ask for context and only have the ability to answer questions based on the context provided.
-                        Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. 
-                        Use three sentences maximum and keep the answer concise"""
+            "content": """You are an expert in Question and Answering tasks specifically regarding rare diseases, focusing on Hypophosphatasia and Ehlers-Danlos Syndrome. 
+            You will be given relevant context to answer user queries. 
+            Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
+            Do not mention in your response that you were given context. Do not reference the context in your response at all. <|eot_id|><|start_header_id|>user<|end_header_id|>
+            Context: {context}
+            User Query: {query}"""
         },
         {
             "role": "user", 

@@ -1,3 +1,1 @@
-model_size = "70B"
-model_name = f"meta-llama/Meta-Llama-3-{model_size}-Instruct"
-model_quantization = True
+model_name = "nvidia/Llama3-ChatQA-1.5-8B"

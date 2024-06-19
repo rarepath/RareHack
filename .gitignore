@@ -1,0 +1,4 @@
+.venv
+chromadb
+*.log
+__pycache__

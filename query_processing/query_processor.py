@@ -6,6 +6,7 @@ from database_retrieval import get_documents
 from reranker import MaxSimReranker
 from hallucination_grader import check_hallucination
 from generation import generate
+from summarizer import summarize
 
 
 
@@ -41,14 +42,14 @@ def process_query(query):
     print("llama:", is_hallucinating_llama) 
     print("gpt:", is_hallucinating_gpt) 
     # # Step 7: Response Post-processing
-    # api_response = post_process_response(chatbot_response)
-    
+    summary = summarize(decorated_query, gpt_response)
+    print("SUMMARY:", summary, end = "\n\n")
     # # Step 8: Return response and response code
-    return [gpt_response, llama_response]
+    return [gpt_response, llama_response, summary]
 
 
 
 # Example usage
 query = "What other genes are associated or might be associated with TNXB variants that cause clEDS?"
-for resp in process_query(query):
-    print(resp, end ="\n\n\n\n")
+for i, resp in enumerate(process_query(query)):
+    print(f"Response {i + 1}: ", resp, end ="\n\n\n\n")

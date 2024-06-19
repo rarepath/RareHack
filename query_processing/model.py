@@ -1,24 +1,18 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from langchain import LanguageModel
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import torch
-from torch.quantization import quantize_dynamic
-from model_config import model_name, model_quantization, model_size
+from model_config import model_name
+from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
+
 
 
     
-'''quantize_dynamic(
-        model,  # the original model
-        {torch.nn.Linear},  # a set of layers to quantize
-        dtype=torch.qint8  # the target data type
-    )    
-'''
 
-model = AutoModelForCausalLM.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name, trust_remote_code=True)
+pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, max_new_tokens = 1000)
+llama_hf = HuggingFacePipeline(pipeline=pipe)
 
 
-
-print(llama_model.generate("What are the symptoms of hypophosphatasia?"))
 
 
 
