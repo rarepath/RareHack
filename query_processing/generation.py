@@ -7,8 +7,6 @@ from model import llama_hf
 
 # Prompt
 
-    ,
-
 #  template="""System: You are an expert in Question and Answering tasks specifically regarding rare diseases, focusing on Hypophosphatasia and Ehlers-Danlos Syndrome. 
 #     You will be given relevant context to answer user queries. 
 #     Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
