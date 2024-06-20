@@ -1,0 +1,169 @@
+/* General styles */
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light gray background */
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.row {
+    flex: 1; /* Make the row fill remaining vertical space */
+    display: flex;
+    overflow: hidden; /* Hide overflow from sidebar and main content */
+}
+
+.sidebar {
+    background-color: #dd5f0d; /* Sidebar background color */
+    color: #fff; /* Text color */
+    padding: 20px;
+}
+
+.sidebar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.chat-area {
+    background-color: #fff; /* White background for chat area */
+    padding: 20px;
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.chat-area p {
+    margin-bottom: 10px;
+}
+
+.chat-area ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chat-area button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.messages {
+    overflow-y: auto; /* Enable scrolling for messages */
+    max-height: 60vh; /* Limit height for messages area */
+    padding-right: 20px; /* Provide space for scrollbar */
+}
+
+/* Response Item Styles */
+.response-item {
+    display: flex; /* Make each response item a flex container */
+    margin-bottom: 10px;
+    justify-content: flex-start; /* Default alignment for response items */
+}
+
+.response-item .text-block {
+    display: inline-block;
+    max-width: 80%; /* Limit text block width */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.response-item.user-message {
+    justify-content: flex-end; /* Align user messages to the right */
+    width: 100%; /* Make sure the user message takes the full width */
+    text-align: right; /* Ensure text within the message is right-aligned */
+}
+
+.response-item.user-message .text-block {
+    background-color: #dd5f0d; /* User message background color */
+    color: #fff; /* Text color */
+    align-content: end; /* Align user messages to the right */
+}
+
+.response-item.chatbot-message {
+    display: flex; /* Ensure chatbot messages are flex items */
+    flex-wrap: wrap; /* Allow wrapping to the next line if needed */
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
+    overflow: hidden; /* Ensures text doesn't overflow */
+    border-right: 2px solid transparent; /* Creates cursor effect */
+    animation: typing 1s steps(40, end), blink-caret 0.75s step-end;
+}
+
+@keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  @keyframes blink-caret {
+    from, to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: black;
+    }
+  }
+
+.response-item.chatbot-message .text-block {
+    background-color: #f0f0f0; /* Chatbot message background color */
+    color: #000; /* Text color */
+    flex: 1; /* Allow each response to grow and shrink as needed */
+    margin: 5px; /* Add some margin between responses */
+}
+
+.response-item.chatbot-message .response {
+    flex: 1;
+    margin: 5px;
+}
+
+.user-input {
+    background-color: #fff; /* White background for input area */
+    border-top: 1px solid #ccc; /* Gray border on top */
+    z-index: 1000; /* Ensure input area is on top */
+}
+
+.user-input textarea {
+    resize: none; /* Disable textarea resizing */
+    border: none; /* Remove border */
+    width: calc(100% - 100px); /* Adjust width */
+    min-height: 50px; /* Minimum height */
+}
+
+.user-input button {
+    width: 100px; /* Button width */
+    border-radius: 0 5px 5px 0; /* Rounded corners */
+}
+
+/* Typing Bubble Styles */
+.typing-bubble .text-block {
+    background-color: #e0e0e0;
+    color: #555;
+    font-style: italic;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column; /* Stack columns on smaller screens */
+    }
+
+    .sidebar {
+        width: 100%; /* Full width sidebar */
+    }
+
+    .chat-area {
+        flex: 1; /* Expand chat area to fill remaining space */
+    }
+}

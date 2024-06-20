@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 sidebar">
+            <!-- Sidebar content -->
+            <div class="logo">MediChat</div>
+            <button (click)="newChat()" class="btn btn-primary">New Chat</button>
+            <button [routerLink]="['/about-us']" class="btn btn-primary">About Us</button>
+            <button [routerLink]="['']" class="btn btn-primary">Home</button>
+            
+            <!-- Three-way toggle for model selection -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+            <div class="tw-toggle">
+                <input type="radio" name="toggle" value="gpt" (change)="updateModelSelection($event)">
+                <label class="toggle toggle-yes"><i class="fa fa-times"></i></label>
+                <input type="radio" name="toggle" value="both" checked (change)="updateModelSelection($event)">
+                <label class="toggle toggle-yes"><i class="fa fa-minus"></i></label>
+                <input type="radio" name="toggle" value="llama" (change)="updateModelSelection($event)">
+                <label class="toggle toggle-yes"><i class="fa fa-check"></i></label>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <div class="chat-area">
+                <!-- Display example questions when no messages -->
+                <ng-container *ngIf="messages.length === 0">
+                    <p>
+                        Hi! How can I help you today? Here are some example questions you can ask me:
+                    </p>
+                    <ul>
+                        <button (click)="sendMessage('What are the symptoms of diabetes?')" class="btn btn-outline-primary btn-sm">What are the symptoms of diabetes?</button>
+                        <button (click)="sendMessage('How can I lower my blood pressure?')" class="btn btn-outline-primary btn-sm">How can I lower my blood pressure?</button>
+                        <button (click)="sendMessage('What are the risk factors for heart disease?')" class="btn btn-outline-primary btn-sm">What are the risk factors for heart disease?</button>
+                        <button (click)="sendMessage('How can I improve my sleep quality?')" class="btn btn-outline-primary btn-sm">How can I improve my sleep quality?</button>
+                    </ul>
+                </ng-container>
+                
+                <div class="messages" [ngClass]="{'single-message': messages.length === 1}">
+                    <div *ngFor="let message of messages" class="response-item" [ngClass]="{'user-message': message.sender === 'user', 'chatbot-message': message.sender !== 'user'}">
+                        <div *ngFor="let response of message.text" class="response">
+                            <p [innerHTML]="response" id="agentResponse"></p>
+                        </div>
+                    </div>
+                    <!-- Typing Bubble -->
+                    <div *ngIf="isTyping" class="response-item chatbot-message typing-bubble">
+                        <div class="response">
+                            <p>Thinking...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User input and send button -->
+            <div class="user-input position-fixed bottom-0 start-50 translate-middle-x p-3 bg-light border rounded shadow-sm" style="max-width: 600px;">
+                <textarea rows="1" placeholder="Type your message..." class="form-control form-control-lg border-0 rounded-0" (input)="onTextareaInput($event)" [(ngModel)]="userInput" (keydown.enter)="sendMessage()"></textarea>
+                <div class="input-group-append">
+                    <button class="btn btn-primary btn-lg mt-2" (click)="sendMessage()" [disabled]="!userInput.trim()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

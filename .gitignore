@@ -5,24 +5,15 @@ __pycache__
 rare-hack-env
 
 # Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+*dist
+*tmp
+*out-tsc
+*bazel-out
 
 # Node
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# IDEs and editors
-.idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
+frontend/node_modules/
+frontend/npm-debug.log
+frontend/yarn-error.log
 
 # Visual Studio Code
 .vscode/*
@@ -33,7 +24,7 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
+frontend/.angular/cache
 .sass-cache/
 /connect.lock
 /coverage
@@ -42,8 +33,5 @@ testem.log
 /typings
 
 # System files
-.DS_Store
-Thumbs.db
-
-# vscode
-.vscode/
+*.DS_Store
+*Thumbs.db
