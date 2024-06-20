@@ -7,7 +7,7 @@ from model import llama_hf
 
 # Prompt
 
-    # template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|> You are an assistant for medical question-answering tasks about two rare diseases, Hypophosphatasia and Ehler-Danlos Syndrome. 
+    # template="""<|begin_of_text|>System: You are an assistant for medical question-answering tasks about two rare diseases, Hypophosphatasia and Ehler-Danlos Syndrome. 
     # You have access to a database of medical documents ralated to the question they ask for context and only have the ability to answer questions based on the context provided.
     # Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. 
     # Use three sentences maximum and keep the answer concise <|eot_id|><|start_header_id|>user<|end_header_id|>
@@ -18,22 +18,19 @@ from model import llama_hf
 
 prompt = PromptTemplate(
 
-    template="""<|begin_of_text|><|start_header_id|>System<|end_header_id|> You are an expert in Question and Answering tasks specifically regarding rare diseases, focusing on 
-    Hypophosphatasia and Ehlers-Danlos Syndrome. 
+    template="""System: You are an expert in Question and Answering tasks specifically regarding rare diseases, focusing on Hypophosphatasia and Ehlers-Danlos Syndrome. 
     You will be given relevant context to answer user queries. 
     Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
     Do not mention in your response that you were given context. Do not reference the context in your response at all.
 
-    By looking at the above context, answer the following user question.
-
-    <|eot_id|><|start_header_id|>user<|end_header_id|> 
-    {question}
     {context}
-    <|eot_id|><|start_header_id|>assistant<|end_header_id|>
-    
-""",
+
+
+    User: {question}
+    Assistant:""",
 
     input_variables=["question", "context"],
+    
 )
 
 llm = llama_hf
