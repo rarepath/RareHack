@@ -16,7 +16,7 @@ def summarize(query, generated_response):
         Summary: <|eot_id|><|start_header_id|>assistant<|end_header_id|>""",
         input_variables=["response"],
 )
-    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.2)
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.2)
 
     summarizer_chain = prompt | llm | StrOutputParser()
 

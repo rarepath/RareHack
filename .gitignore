@@ -1,9 +1,9 @@
-.venv
+venv
 chromadb
 *.log
 __pycache__
 rare-hack-env
-
+node_modules
 # Compiled output
 *dist
 *tmp

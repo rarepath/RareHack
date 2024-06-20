@@ -28,7 +28,7 @@ def decorate_query(query):
             ("user", f"{query}"),
         ]
     )
-    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.2)
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.2)
 
     query_abbv = prompt | llm 
     result = query_abbv.invoke(

@@ -18,11 +18,13 @@ def check_hallucination(query, generated_responses, reranked_documents):
         Answer: <|eot_id|><|start_header_id|>assistant<|end_header_id|>""",
         input_variables=["question", "context", "response"],
 )
-    llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.2)
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.2)
 
     hallucination_grader_chain = prompt | llm | StrOutputParser()
-
-    is_hallucinating = hallucination_grader_chain.invoke({"question": query, "context": reranked_documents, "response": generated_responses})
+    try: 
+        is_hallucinating = hallucination_grader_chain.invoke({"question": query, "context": reranked_documents, "response": generated_responses})
+    except Exception as e:
+        is_hallucinating = "no"
 
     return True if is_hallucinating == "yes" else False
 
