@@ -29,7 +29,7 @@ prompt = PromptTemplate(
     <|eot_id|><|start_header_id|>user<|end_header_id|> 
     {question}
     {context}
-    <|eot_id|><|start_header_id|>assistant<|end_header_id>
+    <|eot_id|><|start_header_id|>assistant<|end_header_id|>
     
 """,
 
