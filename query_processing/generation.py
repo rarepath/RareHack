@@ -48,7 +48,7 @@ def generate(query, context):
             "content": """You are an expert in Question and Answering tasks specifically regarding rare diseases, focusing on Hypophosphatasia and Ehlers-Danlos Syndrome. 
             You will be given relevant context to answer user queries. 
             Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
-            Do not mention in your response that you were given context. Do not reference the context in your response at all. <|eot_id|><|start_header_id|>user<|end_header_id|>
+            Do not mention in your response that you were given context. Do not reference the context in your response at all.
             Context: {context}
             User Query: {query}"""
         },

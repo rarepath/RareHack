@@ -10,7 +10,7 @@ from summarizer import summarize
 
 
 
-def process_query(query):
+def process_query(query, summary=''):
     # Step 1: Query Expansion
     decorated_query = decorate_query(query)
     expanded_queries = get_expanded_queries(decorated_query)
