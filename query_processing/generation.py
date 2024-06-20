@@ -24,7 +24,7 @@ Assistant:""",
     input_variables=["question", "context"],
 )
 
-llm = Ollama(model=llama_hf, temperature=0.2)
+llm = llama_hf
 
 
 llama_generation = llama_prompt | llm | StrOutputParser()
