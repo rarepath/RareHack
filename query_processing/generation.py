@@ -12,7 +12,7 @@ from model import llama_hf
 #     Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
 #     Do not mention in your response that you were given context. Do not reference the context in your response at all.
 
-prompt = PromptTemplate(
+llama_prompt = PromptTemplate(
 
    template="""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
@@ -33,7 +33,7 @@ prompt = PromptTemplate(
 llm = llama_hf
 
 
-llama_generation = prompt | llm | StrOutputParser()
+llama_generation = llama_prompt | llm | StrOutputParser()
 
 def generate(query, context):
     llama_response = llama_generation.invoke({"question": query, "context": context})
