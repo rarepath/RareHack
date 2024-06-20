@@ -23,12 +23,12 @@ prompt = PromptTemplate(
     Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
     Do not mention in your response that you were given context. Do not reference the context in your response at all.
     {context}
-    
+
     By looking at the above context, answer the following user question.
 
     User: {question}
 
-    Assistant:
+    Assistant:<|eot_id|>
 """,
 
     input_variables=["question", "context"],

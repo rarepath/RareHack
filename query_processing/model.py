@@ -1,8 +1,8 @@
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, QuantoConfig
 import torch
-from model_config import model_name
 from langchain_huggingface import HuggingFacePipeline
 
+model_name = "nvidia/Llama3-ChatQA-1.5-8B"
 
 
 quantization_config = QuantoConfig(weights="float8")
