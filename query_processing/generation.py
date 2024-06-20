@@ -23,11 +23,11 @@ prompt = PromptTemplate(
     Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
     Do not mention in your response that you were given context. Do not reference the context in your response at all.
     {context}
-User: {question}
 
-Assistant:
+    User: {question}
+
+    Assistant:
 """,
-
 
     input_variables=["question", "context"],
 )
@@ -35,7 +35,7 @@ Assistant:
 llm = llama_hf
 
 
-llama_generation = prompt | llm
+llama_generation = prompt | llm | StrOutputParser()
 
 def generate(query, context):
     llama_response = llama_generation.invoke({"question": query, "context": context})
