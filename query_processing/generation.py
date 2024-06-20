@@ -23,6 +23,8 @@ prompt = PromptTemplate(
     Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
     Do not mention in your response that you were given context. Do not reference the context in your response at all.
     {context}
+    
+    By looking at the above context, answer the following user question.
 
     User: {question}
 
@@ -52,10 +54,11 @@ def generate(query, context):
         },
         {
             "role": "user", 
-            "content": f'Question: {query} Context: {context}' }
+            "content": f'Question: {query} Context: {context}' 
+        }
     ],
     temperature=0.3,
-    max_tokens=500
+    max_tokens=700
 )
 
     gpt_response = openai_response.choices[0].message.content
