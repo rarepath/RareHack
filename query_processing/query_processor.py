@@ -5,7 +5,7 @@ from database_retrieval import embed_query
 from database_retrieval import get_documents
 from reranker import MaxSimReranker
 from hallucination_grader import check_hallucination
-from generation import generate
+from generation import generate_gpt, generate_llama
 from summarizer import summarize
 
 
@@ -32,7 +32,8 @@ def process_query(query, summary=''):
     ranked_documents = MaxSimReranker().rank_documents(decorated_query, retrieved_docs)
     # print(ranked_documents)
     # Step 5: Response Generation
-    gpt_response, llama_response = generate(decorated_query, ranked_documents[:3])
+    gpt_response = generate_gpt(decorated_query, ranked_documents[:3])
+    llama_response = generate_llama(decorated_query, ranked_documents[:3])
 
 
     # # Step 6: Hallucination Detection
