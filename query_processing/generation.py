@@ -19,8 +19,7 @@ prompt = PromptTemplate(
     Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
     Do not mention in your response that you were given context.<|eot_id|><|start_header_id|>user<|end_header_id|>
     Question: {question} 
-    Context: {context} 
-    Answer: <|eot_id|>
+    Context: {context} <|eot_id|>
     <|start_header_id|>assistant<|end_header_id|>""",
 
     input_variables=["question", "context"],
