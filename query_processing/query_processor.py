@@ -43,7 +43,6 @@ def process_query(query, summary=''):
     print("gpt:", is_hallucinating_gpt) 
     # # Step 7: Response Post-processing
     summary = summarize(decorated_query, gpt_response)
-    print("SUMMARY:", summary, end = "\n\n")
     # # Step 8: Return response and response code
     return [gpt_response, llama_response, summary]
 
@@ -51,5 +50,7 @@ def process_query(query, summary=''):
 
 # Example usage
 query = "What other genes are associated or might be associated with TNXB variants that cause clEDS?"
-for i, resp in enumerate(process_query(query)):
-    print(f"Response {i + 1}: ", resp, end ="\n\n\n\n")
+gpt_response, llama_response, summary = process_query(query)
+print("GPT Response:", gpt_response)
+print("LLAMA Response:", llama_response)
+print("Summary:", summary)

@@ -10,7 +10,6 @@ quantization_config = QuantoConfig(weights="float8")
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(
                                              model_name, 
-                                             tokenizer=tokenizer,
                                              device_map = "auto", 
                                              trust_remote_code=True, 
                                              quantization_config=quantization_config
