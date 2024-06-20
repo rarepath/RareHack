@@ -20,8 +20,7 @@ prompt = """System: You are an expert in Question and Answering tasks specifical
 
     User: {question}
 
-    Assistant:<|eot_id|>
-"""
+    Assistant:"""
 
 question = "What other genes are associated or might be associated with TNXB variants that cause clEDS?"
 tokenized_prompt = tokenizer(tokenizer.bos_token + prompt, return_tensors="pt").to(model.device)
