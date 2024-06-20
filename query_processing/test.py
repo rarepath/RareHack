@@ -1,58 +1,41 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, QuantoConfig
+from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
-from model_config import model_name
-from langchain_huggingface import HuggingFacePipeline
 
+model_id = "nvidia/Llama3-ChatQA-1.5-8B"
 
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype=torch.float16, device_map="auto")
 
-quantization_config = QuantoConfig(weights="float8")
+messages = [
+    {"role": "user", "content": "what is the percentage change of the net income from Q4 FY23 to Q4 FY24?"}
+]
 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name, device_map = "auto", trust_remote_code=True, quantization_config=quantization_config)
+document = """NVIDIA (NASDAQ: NVDA) today reported revenue for the fourth quarter ended January 28, 2024, of $22.1 billion, up 22% from the previous quarter and up 265% from a year ago.\nFor the quarter, GAAP earnings per diluted share was $4.93, up 33% from the previous quarter and up 765% from a year ago. Non-GAAP earnings per diluted share was $5.16, up 28% from the previous quarter and up 486% from a year ago.\nQ4 Fiscal 2024 Summary\nGAAP\n| $ in millions, except earnings per share | Q4 FY24 | Q3 FY24 | Q4 FY23 | Q/Q | Y/Y |\n| Revenue | $22,103 | $18,120 | $6,051 | Up 22% | Up 265% |\n| Gross margin | 76.0% | 74.0% | 63.3% | Up 2.0 pts | Up 12.7 pts |\n| Operating expenses | $3,176 | $2,983 | $2,576 | Up 6% | Up 23% |\n| Operating income | $13,615 | $10,417 | $1,257 | Up 31% | Up 983% |\n| Net income | $12,285 | $9,243 | $1,414 | Up 33% | Up 769% |\n| Diluted earnings per share | $4.93 | $3.71 | $0.57 | Up 33% | Up 765% |"""
 
-prompt = """System: You are an expert in Question and Answering tasks specifically regarding rare diseases, focusing on Hypophosphatasia and Ehlers-Danlos Syndrome. 
-    You will be given relevant context to answer user queries. 
-    Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
-    Do not mention in your response that you were given context. Do not reference the context in your response at all.
+def get_formatted_input(messages, context):
+    system = "System: This is a chat between a user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions based on the context. The assistant should also indicate when the answer cannot be found in the context."
+    instruction = "Please give a full and complete answer for the question."
 
-    "Years of investigations showed that Ehlers-Danlos syndrome is a disorder with a very complex phenotype and highly complicated genotype. 
-    Publisher\\'s Note: MDPI stays neutral with regard to jurisdictional claims in published maps and institutional affiliations.", 
-    "Ehlers-Danlos syndrome (EDS) is a heterogeneous group of heritable connective tissue disorders. 
-    The 2017 International Classification of EDS recognizes 13 subtypes caused by pathogenic variants in 19 different genes, 
-    encoding different types of collagen or protein involved in collagen metabolism (Table 1). 
-    The most abundant types of EDS are classical (cEDS), vascular (vEDS), and hypermobile (hEDS); all EDS types, except hEDS, have their genetic backgrounds determined. 
-    According to the newest classification, classical EDS is inherited as an autosomal dominant disorder caused by mutations in COL5A1, COL5A2, or c.934C>T in COL1A1. 
-    For the clinical diagnosis of cEDS, major and minor criteria were established. 
-    cEDS should be suspected when skin hyperextensibility and atrophic scars are present (major criterion 1), 
-    together with joint hypermobility assessed with the Beighton score (major criterion 2), 
-    and/or with at least three minor criteria 
-    (easy bruising, soft, doughy skin, skin fragility, molluscoid pseudotumors, subcutaneous spheroids, hernias (or history thereof), epicanthal folds, complications of 
-    joint hypermobility (e.g., sprains, dislocations/subluxations, pain, pes planus), and family history of a first-degree relative who meets clinical criteria). 
-    Clinical features included in EDS classification are only one part of the disabilities recognized in EDS patients. 
-    In addition to major and minor phenotype criteria, patients\\' clinical picture also contains dysfunction of the gastrointestinal, cardiovascular, immune, neural, and other systems. 
-    The clinical symptoms may differ among patients within the same family and may occur at different ages with various intensities. 
-    It is worth noting that not all cEDS patients with a pathogenic variant in the COL5A1 or COL5A2 gene fulfil the criteria for classical type EDS diagnosis according to the International Classification (Table 1). 
-    Some may share their symptoms with other types of EDS (mainly with hypermobile, classical-like, or vascular) or other connective tissue disorders, and establishing their diagnosis is possible only after molecular investigation. 
-    Diagnosis of cEDS must be established based on clinical criteria and confirmed by molecular analysis. 
-    Genetic testing was primarily based on single-gene testing by Sanger sequencing (COL5A1, COL5A2, and c.934C>T in COL1A1). 
-    However, nowadays, because of phenotypic heterogeneity and clinical overlapping among EDS types and between EDS and other connective tissue disorders, 
-    single-gene testing conducted after clinical evaluation is often not definitive and leaves EDS patients without a molecular diagnosis. Molecular testing with next-generation sequencing (NGS) and a multigene panel, containing EDS-related and other connective tissue-associated genes (for diagnosis specifying), seems to be a very adequate method. In the present study, we evaluated the molecular background of Polish cEDS patients by NGS with an Illumina connective tissue gene panel.", 'The Ehlers-Danlos syndromes (EDS) consist of 13 subtypes with overlapping features including joint hypermobility, skin, and vascular fragility and generalised connective tissue friability. Current major criteria for classical EDS (cEDS) are (1) skin hyperextensibility and atrophic scars and (2) joint hypermobility. Minor criteria are easy bruising, soft doughy skin, skin fragility, molluscoid pseudotumors, subcutaneous spheroids, hernia(s), epicanthal folds, complications of joint hypermobility, and an affected first degree relative. The minimal criteria for a diagnosis of cEDS are major criterion 1 plus either major criterion 2 or 3 of the 9 minor criteria. In patients who satisfy the main criteria of cEDS according to the Villefranche criteria, the variant detection rate in either COL5A1 or COL5A2 is over 90%. However, intrafamilial variability in classical EDS has been reported. There are 194 reported unique variants reported in the COL5A1 gene. These genes encode collagen type V, a fibrillar heterotrimer ([alpha1(V)]2 alpha2(V)) that is present in a wide variety of tissues but is particularly prevalent in bone, skin and tendon. Collagen type V accounts for approximately 5% of total body collagen and has a role in maintaining the deposition and structure of other more abundant collagens, particularly collagen type I. Rarely, a diagnosis of cEDS is due to dominant variants in COL1A1 or COL1A2. For many years, skin biopsies for electron microscopy (EM) have been recommended as a first line of investigation to confirm or exclude a diagnosis of cEDS. This was due to the occurrence of collagen flowers visible by EM. Collagen flowers in individuals with classical EDS were described by Vogel et al. who reported collagen fibrils with an abnormally large diameter and a highly irregular and lobulated contour interspersed with normal appearing fibrils with a mean diameter larger than that of collagen fibrils in normal skin. A longitudinal section showed that the large atypical fibrils were seen to be poorly integrated filamentous aggregates. Variation in frequency of very large highly irregular fibrils differed per patient but in general constituted approximately 5%. These very large highly-irregular fibrils are often described as longitudinally splayed and loosely packed fibrils, which in cross section produce the collagen flower pattern. Although it is known that collagen flowers can be found in other collagen disorders including osteogenesis imperfecta and Ullrich congenital muscular dystrophy, typical collagen flowers were thought to be invariably present in people with cEDS. Given the high detection rates of pathogenic variants in cEDS, current recommendations are that electron microscopy based on a skin biopsy should no longer the first line of investigation but could be used to clarify inconclusive molecular results, or to guide further testing if initial molecular testing is negative. Interestingly, it was mentioned that "the absence of typical collagen flowers would go against the diagnosis, as there are no known reports of patients with type V collagen abnormalities without collagen flowers on EM". Here, we report for the first time two patients, one fulfilling the clinical diagnosis of classical EDS and one not, with (likely) pathogenic variants in COL5A1 and absence of collagen flowers on EM.'
+    for item in messages:
+        if item['role'] == "user":
+            ## only apply this instruction for the first user turn
+            item['content'] = instruction + " " + item['content']
+            break
 
-    By looking at the above context, answer the following user question.
+    conversation = '\n\n'.join(["User: " + item["content"] if item["role"] == "user" else "Assistant: " + item["content"] for item in messages]) + "\n\nAssistant:"
+    formatted_input = system + "\n\n" + context + "\n\n" + conversation
+    
+    return formatted_input
 
-    User: What other genes are associated or might be associated with TNXB variants that cause clEDS?
-
-    Assistant:"""
-
-
-tokenized_prompt = tokenizer(tokenizer.bos_token + prompt, return_tensors="pt").to(model.device)
+formatted_input = get_formatted_input(messages, document)
+tokenized_prompt = tokenizer(tokenizer.bos_token + formatted_input, return_tensors="pt").to(model.device)
+print(formatted_input)
 terminators = [
     tokenizer.eos_token_id,
     tokenizer.convert_tokens_to_ids("<|eot_id|>")
 ]
+print(tokenized_prompt.input_ids)
 outputs = model.generate(input_ids=tokenized_prompt.input_ids, attention_mask=tokenized_prompt.attention_mask, max_new_tokens=128, eos_token_id=terminators)
-
-
 
 response = outputs[0][tokenized_prompt.input_ids.shape[-1]:]
 print(tokenizer.decode(response, skip_special_tokens=True))
