@@ -25,13 +25,13 @@ prompt = """System: You are an expert in Question and Answering tasks specifical
 
 question = "What other genes are associated or might be associated with TNXB variants that cause clEDS?"
 tokenized_prompt = tokenizer(tokenizer.bos_token + prompt, return_tensors="pt").to(model.device)
-
-outputs = model.generate(input_ids=tokenized_prompt.input_ids, attention_mask=tokenized_prompt.attention_mask, max_new_tokens=128, eos_token_id=terminators)
-
 terminators = [
     tokenizer.eos_token_id,
     tokenizer.convert_tokens_to_ids("<|eot_id|>")
 ]
+outputs = model.generate(input_ids=tokenized_prompt.input_ids, attention_mask=tokenized_prompt.attention_mask, max_new_tokens=128, eos_token_id=terminators)
+
+
 
 response = outputs[0][tokenized_prompt.input_ids.shape[-1]:]
 print(tokenizer.decode(response, skip_special_tokens=True))
