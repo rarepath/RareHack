@@ -5,7 +5,7 @@
             <div class="logo">MediChat</div>
             <div class="sd-bar-btn">
                 <button (click)="newChat()" class="btn-side">New Chat</button>
-                <button [routerLink]="['/about-us']" class="bt-side">About Us</button>
+                <!-- <button [routerLink]="['/about-us']" class="bt-side">About Us</button> -->
                 <button [routerLink]="['']" class="btn-side">Home</button>
             </div>
             
@@ -15,12 +15,12 @@
                 <p><strong>Which model would you like to see a response from?</strong></p>
                 <label>
                   <input type="radio" name="toggle" value="gpt" (change)="updateModelSelection($event)">
-                  GPT4o
+                  GPT-4o
                 </label>
                 
                 <label>
                   <input type="radio" name="toggle" value="llama" (change)="updateModelSelection($event)">
-                  Llama3
+                  Llama 3
                 </label>
                 
                 <label>
