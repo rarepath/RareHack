@@ -25,8 +25,8 @@ def get_documents(queries_embeddings):
     documents = collection.query(
                                     query_embeddings=queries_embeddings, 
                                     n_results=9, 
-                                    include=["documents", "embeddings"])
-                                    # include=["metadatas", "embeddings", "documents"])
+                                    # include=["documents", "embeddings"])
+                                    include=["metadatas", "embeddings", "documents"])
     
     return documents
 

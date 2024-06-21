@@ -29,7 +29,7 @@ def process_query(query, model_selection, summary=''):
     ranked_documents = MaxSimReranker().rank_documents(decorated_query, retrieved_docs)
     # print(ranked_documents)
     # Step 5: Response Generation
-
+    urls = [doc['metadatas']['url'] for doc in ranked_documents[:3]]
     if model_selection == "gpt":
         gpt_response = generate_gpt(decorated_query, ranked_documents[:3])
         # is_hallucinating_gpt = check_hallucination(gpt_response, decorated_query, ranked_documents[:3])
@@ -37,7 +37,7 @@ def process_query(query, model_selection, summary=''):
             # gpt_response = hallucination_response
 
         summary = summarize(decorated_query, gpt_response)
-        return [gpt_response, summary]
+        return [gpt_response, urls, summary]
 
     elif model_selection == "llama":
         llama_response = generate_llama(decorated_query, ranked_documents[:3])
@@ -45,7 +45,7 @@ def process_query(query, model_selection, summary=''):
         # if is_hallucinating_llama:
             # llama_response = hallucination_response
         summary = summarize(decorated_query, llama_response)
-        return [llama_response, summary]
+        return [llama_response, urls, summary]
     
     else:
         gpt_response = generate_gpt(decorated_query, ranked_documents[:3])
@@ -59,7 +59,7 @@ def process_query(query, model_selection, summary=''):
             # llama_response = hallucination_response
 
         summary = summarize(decorated_query, llama_response)
-        return [gpt_response, llama_response, summary]
+        return [gpt_response, llama_response, urls, summary]
 
 
 
