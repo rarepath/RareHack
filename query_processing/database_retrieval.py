@@ -12,9 +12,10 @@ chroma_client = chromadb.HttpClient(host='localhost', port=8000)
 def embed_query(query): 
     # Embed the query using OpenAI's API
     response = OpenAI().embeddings.create(input = [query], model='text-embedding-3-large').data[0]
+
     # response = model.encode(query) 
     # response = chroma_client.get_embedding('text-embedding-3-large', query)
-    return response.tolist()
+    return response.embedding
 
    
 
