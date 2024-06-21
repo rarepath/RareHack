@@ -19,7 +19,7 @@ def embed_query(query):
    
 
 def get_documents(queries_embeddings):
-    collection = chroma_client.get_collection('section-embeddings')
+    collection = chroma_client.get_collection('vector-store-rare-diseases1')
     # Get the documents from the database
     documents = collection.query(
                                     query_embeddings=queries_embeddings, 
