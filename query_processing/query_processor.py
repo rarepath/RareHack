@@ -33,7 +33,7 @@ def process_query(query, model_selection, summary=''):
         urls = [doc[1]['URL'] for doc in ranked_documents[:3]]
     except:
         urls = []
-    if model_selection == "gpt":
+    if model_selection == "GPT4o":
         gpt_response = generate_gpt(decorated_query, ranked_documents[:3], summary)
         # is_hallucinating_gpt = check_hallucination(gpt_response, decorated_query, ranked_documents[:3])
         # if is_hallucinating_gpt:
@@ -42,7 +42,7 @@ def process_query(query, model_selection, summary=''):
         summary = summarize(decorated_query, gpt_response)
         return [gpt_response, urls, decorated_query + summary]
 
-    elif model_selection == "llama":
+    elif model_selection == "Llama3":
         llama_response = generate_llama(decorated_query, ranked_documents[:3], summary)
         # is_hallucinating_llama = check_hallucination(llama_response, decorated_query, ranked_documents[:3])
         # if is_hallucinating_llama:

@@ -60,9 +60,9 @@ def get_response():
       }
       summary = chatbot_response[3]
     
-    rlist = [gpt_resp_obj, llama_resp_obj, summary]
-    response = jsonify(rlist)
-    return response
+      rlist = [gpt_resp_obj, llama_resp_obj, summary]
+      response = jsonify(rlist)
+      return response
 
 
 if __name__ == '__main__':
