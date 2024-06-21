@@ -1,8 +1,7 @@
 #Takes a query and returns chat response and a response code. End to end query processor.
 
 from query_processing.query_expansion import get_expanded_queries, decorate_query
-from query_processing.database_retrieval import embed_query
-from query_processing.database_retrieval import get_documents
+from query_processing.database_retrieval import embed_query, get_documents
 from query_processing.reranker import MaxSimReranker
 from query_processing.hallucination_grader import check_hallucination
 from query_processing.generation import generate_gpt, generate_llama
@@ -32,7 +31,7 @@ def process_query(query, model_selection, summary=''):
     # Step 5: Response Generation
     urls = [doc[1]['URL'] for doc in ranked_documents[:3]]
     if model_selection == "gpt":
-        gpt_response = generate_gpt(decorated_query, ranked_documents[:3])
+        gpt_response = generate_gpt(decorated_query, ranked_documents[:3], summary)
         # is_hallucinating_gpt = check_hallucination(gpt_response, decorated_query, ranked_documents[:3])
         # if is_hallucinating_gpt:
             # gpt_response = hallucination_response
@@ -54,7 +53,7 @@ def process_query(query, model_selection, summary=''):
         # if is_hallucinating_gpt:
             # gpt_response = hallucination_response
 
-        llama_response = generate_llama(decorated_query, ranked_documents[:3])
+        llama_response = generate_llama(decorated_query, ranked_documents[:3], summary)
         # is_hallucinating_llama = check_hallucination(llama_response, decorated_query, ranked_documents[:3])
         # if is_hallucinating_llama:
             # llama_response = hallucination_response
