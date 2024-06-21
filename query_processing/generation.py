@@ -100,8 +100,7 @@ def generate_gpt(query, context, summary):
                 },
                 {
                     "role": "user", 
-                    "content": f'''Question: {query} 
-                    Context: {context}''' 
+                    "content": f'''Question: {query} Context: {context}''' 
                 }
             ],
     else:
@@ -115,9 +114,8 @@ def generate_gpt(query, context, summary):
                 },
                 {
                     "role": "user", 
-                    f"Summary: {summary}"""
-                    "content": f'''Question: {query} 
-                    Context: {context}'''
+                    "content": f'''Summary: {summary} Question: {query} 
+                    Context: {context} '''
                 }
             ]
     
