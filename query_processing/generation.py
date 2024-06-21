@@ -111,7 +111,7 @@ def generate_gpt(query, context, summary):
                     "content": """You are an expert in Question and Answering tasks specifically regarding rare diseases, focusing on Hypophosphatasia and Ehlers-Danlos Syndrome. 
                     You will be given relevant context to answer user queries. The user will provide you with a summary of the last response you generated.
                     Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
-                    Do not mention in your response that you were given context. Refuse to answer if the question is unrelated to Hypophosphatasia or Ehlers-Danlos Syndrome."""
+                    Do not mention in your response that you were given context. Say you do not know the answer if the question is unrelated to Hypophosphatasia or Ehlers-Danlos Syndrome."""
                 },
                 {
                     "role": "user", 
@@ -128,9 +128,10 @@ def generate_gpt(query, context, summary):
         messages= messages,
         temperature=0.3,
         max_tokens=700
-    )
+        )
 
         gpt_response = openai_response.choices[0].message.content
+
     except Exception as e:
         gpt_response = "Encountered an error while generating response. Please try again later."
 
