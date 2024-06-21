@@ -43,7 +43,7 @@ def process_query(query, model_selection, summary=''):
         return [gpt_response, urls, decorated_query + summary]
 
     elif model_selection == "llama":
-        llama_response = generate_llama(decorated_query, ranked_documents[:3])
+        llama_response = generate_llama(decorated_query, ranked_documents[:3], summary)
         # is_hallucinating_llama = check_hallucination(llama_response, decorated_query, ranked_documents[:3])
         # if is_hallucinating_llama:
             # llama_response = hallucination_response
@@ -51,7 +51,7 @@ def process_query(query, model_selection, summary=''):
         return [llama_response, urls, decorated_query + summary]
     
     else:
-        gpt_response = generate_gpt(decorated_query, ranked_documents[:3])
+        gpt_response = generate_gpt(decorated_query, ranked_documents[:3], summary)
         # is_hallucinating_gpt = check_hallucination(gpt_response, decorated_query, ranked_documents[:3])
         # if is_hallucinating_gpt:
             # gpt_response = hallucination_response
