@@ -33,7 +33,7 @@ def process_query(query, model_selection, summary=''):
         urls = [doc[1]['URL'] for doc in ranked_documents[:3]]
     except:
         urls = []
-    if model_selection == "GPT4o":
+    if model_selection == "gpt":
         gpt_response = generate_gpt(decorated_query, ranked_documents[:3], summary)
         # is_hallucinating_gpt = check_hallucination(gpt_response, decorated_query, ranked_documents[:3])
         # if is_hallucinating_gpt:
