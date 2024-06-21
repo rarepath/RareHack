@@ -20,24 +20,50 @@ def get_response():
     # response: [gpt_response, llama_response, summary]
     # model response object: {"agentName": "", "agentResp": "", "urls": [], "summary": ""}
     chatbot_response = process_query(user_input, model_selection, current_summary)
-
-    gpt_response = chatbot_response[0]
-    llama_response = chatbot_response[1]
-    gpt_resp_obj = gpt_response = {
-    "agentName": "GPT-4-turbo",
-    "agentResponse": gpt_response,
-    "urls": [
-      "gpt.com",
-        ]
-    }
-    llama_resp_obj = {
-    "agentName": "llama-3",
-    "agentResponse": llama_response,
-    "urls": [
-      "ollama.com"
-        ]
-    }
-    summary = chatbot_response[2]
+    if model_selection == "gpt":
+        gpt_response = chatbot_response[0]
+        gpt_resp_obj = {
+        "agentName": "GPT-4-turbo",
+        "agentResponse": gpt_response,
+        "urls": [
+          "gpt.com",
+            ]
+        }
+        summary = chatbot_response[1]
+        rlist = [gpt_resp_obj, summary]
+        response = jsonify(rlist)
+        return response
+    elif model_selection == "llama":
+        llama_response = chatbot_response[0]
+        llama_resp_obj = {
+        "agentName": "llama-3",
+        "agentResponse": llama_response,
+        "urls": [
+          "ollama.com"
+            ]
+        }
+        summary = chatbot_response[1]
+        rlist = [llama_resp_obj, summary]
+        response = jsonify(rlist)
+        return response
+    else:
+      gpt_response = chatbot_response[0]
+      llama_response = chatbot_response[1]
+      gpt_resp_obj = gpt_response = {
+      "agentName": "GPT-4-turbo",
+      "agentResponse": gpt_response,
+      "urls": [
+        "gpt.com",
+          ]
+      }
+      llama_resp_obj = {
+      "agentName": "llama-3",
+      "agentResponse": llama_response,
+      "urls": [
+        "ollama.com"
+          ]
+      }
+      summary = chatbot_response[2]
     
     rlist = [gpt_resp_obj, llama_resp_obj, summary]
     response = jsonify(rlist)
