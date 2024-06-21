@@ -7,7 +7,7 @@ import { Observable, catchError } from 'rxjs';
 })
 export class ChatService {
 
-    private apiUrl: string = "http://localhost:5000";
+    private apiUrl: string = "https://rarehack.rtx.ai/api";
 
     constructor(private http: HttpClient){}
 

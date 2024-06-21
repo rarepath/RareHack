@@ -4,6 +4,7 @@ chromadb
 __pycache__
 rare-hack-env
 node_modules
+.angular
 # Compiled output
 *dist
 *tmp

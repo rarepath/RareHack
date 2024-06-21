@@ -1,6 +1,6 @@
 import torch
 import chromadb
-from database_retrieval import embed_query, get_documents
+from query_processing.database_retrieval import embed_query, get_documents
 
 class MaxSimReranker:
     def __init__(self):
@@ -28,42 +28,5 @@ class MaxSimReranker:
             scores.append(score.item())
 
         ranked_indices = torch.argsort(torch.tensor(scores), descending=True)
-        print(scores)   
+        # print(scores)   
         return [documents['documents'][0][i] for i in ranked_indices]
-
-# Initialize the reranker
-# reranker = MaxSimReranker()
-
-# # Example query
-# query = "What is hypophosphatasia?"
-# query_embedding = embed_query(query)
-# query_embeddings = torch.tensor([query_embedding], dtype=torch.float32)
-# # Retrieve documents and their embeddings
-# documents = get_documents(query_embedding)
-# # print(documents)
-# # Re-rank documents
-# reranked_documents = reranker.rank_documents(query_embeddings, documents)
-# print(reranked_documents)
-
-
-
-
-# query_embeddings = torch.tensor([[0.1, 0.2, 0.3]], dtype=torch.float32)
-# documents = [{
-#     'embedding': [0.1, 0.2, 0.3],
-#     'metadata': {'text': 'Document 1'}
-# }, {
-#     'embedding': [0.4, 0.5, 0.6],
-#     'metadata': {'text': 'Document 2'}
-# }]
-
-# for doc in documents:
-#     doc['embedding'] = torch.tensor(doc['embedding'], dtype=torch.float32).unsqueeze(0)
-
-# reranked_documents = reranker.rank_documents(query_embeddings, documents)
-
-
-
-# # Display only the re-ranked document texts
-# for doc, score in reranked_documents:
-#     print(doc)

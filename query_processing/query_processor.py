@@ -13,7 +13,7 @@ def process_query(query, summary=''):
     decorated_query = decorate_query(query)
     expanded_queries = get_expanded_queries(decorated_query)
     expanded_queries = [decorated_query] + expanded_queries
-    print(expanded_queries)
+    # print(expanded_queries)
     
     # Step 2: Query Embedding
     query_embeddings = []
@@ -23,12 +23,10 @@ def process_query(query, summary=''):
     # Step 3: Document Retrieval
     retrieved_docs = get_documents(query_embeddings)
 
-
-    #unpack documents
         
     # Step 4: Re-ranking of documents
     ranked_documents = MaxSimReranker().rank_documents(decorated_query, retrieved_docs)
-    print(ranked_documents)
+    # print(ranked_documents)
     # Step 5: Response Generation
     gpt_response = generate_gpt(decorated_query, ranked_documents[:3])
     llama_response = generate_llama(decorated_query, ranked_documents[:3])
@@ -38,8 +36,8 @@ def process_query(query, summary=''):
     is_hallucinating_llama = check_hallucination(llama_response, decorated_query, ranked_documents[:3])
     is_hallucinating_gpt = check_hallucination(gpt_response, decorated_query, ranked_documents[:3])
 
-    print("llama:", is_hallucinating_llama) 
-    print("gpt:", is_hallucinating_gpt) 
+    # print("llama:", is_hallucinating_llama) 
+    # print("gpt:", is_hallucinating_gpt) 
     # # Step 7: Response Post-processing
     summary = summarize(decorated_query, gpt_response)
     # # Step 8: Return response and response code
@@ -48,8 +46,8 @@ def process_query(query, summary=''):
 
 
 # Example usage
-query = "What is HPP?"
-gpt_response, llama_response, summary = process_query(query)
-print("GPT Response:", gpt_response)
-print("LLAMA Response:", llama_response)
-print("Summary:", summary)
+# query = "What is HPP?"
+# gpt_response, llama_response, summary = process_query(query)
+# print("GPT Response:", gpt_response)
+# print("LLAMA Response:", llama_response)
+# print("Summary:", summary)
