@@ -132,6 +132,6 @@ def generate_gpt(query, context, summary):
 
         gpt_response = openai_response.choices[0].message.content
     except Exception as e:
-        gpt_response = "I'm sorry, but I couldn't generate a complete response. Could you please provide more details or try asking a more specific question?"
+        gpt_response = "Encountered an error while generating response. Please try again later."
 
     return gpt_response
