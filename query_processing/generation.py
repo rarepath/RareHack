@@ -128,11 +128,13 @@ def generate_gpt(query, context, summary):
         messages= messages,
         temperature=0.3,
         max_tokens=700
+
         )
 
         gpt_response = openai_response.choices[0].message.content
 
     except Exception as e:
+        print("Error generating response: ", e)
         gpt_response = "Encountered an error while generating response. Please try again later."
 
     return gpt_response
