@@ -58,7 +58,7 @@ def process_query(query, model_selection, summary=''):
         if is_hallucinating_llama:
             llama_response = hallucination_response
 
-        summary = summarize(decorated_query, gpt_response, llama_response)
+        summary = summarize(decorated_query, llama_response)
         return [gpt_response, llama_response, summary]
 
 
