@@ -2,8 +2,10 @@
 body, html {
     height: 100%;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Light gray background */
+    background-color: rgb(75, 75, 75); /* Light gray background */
 }
+
+
 
 .container-fluid {
     display: flex;
@@ -15,10 +17,13 @@ body, html {
     flex: 1; /* Make the row fill remaining vertical space */
     display: flex;
     overflow: hidden; /* Hide overflow from sidebar and main content */
+    background-color:  rgb(75, 75, 75);
 }
 
 .sidebar {
-    background-color: #dd5f0d; /* Sidebar background color */
+    background-color: black; /* Sidebar background color */
+    border-top-right-radius: 3%;
+    border-bottom-right-radius: 3%;
     color: #fff; /* Text color */
     padding: 20px;
 }
@@ -27,33 +32,80 @@ body, html {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+    text-align: center;
+    margin-top: 50px;
+
 }
 
 .sidebar button {
     display: block;
     width: 100%;
     margin-bottom: 10px;
+    background-color: #dd5f0d;
+    border: 1px solid #dd5f0d;
+    color: white;
+    border-radius: 5px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.sidebar button:hover {
+    color: black;
 }
 
 .chat-area {
-    background-color: #fff; /* White background for chat area */
-    padding: 20px;
     overflow-y: auto; /* Enable vertical scrolling */
+    margin-top: 150px;
+    width: 100%;
+}
+
+.example-btn {
+    width: 75%;
+}
+
+.btn {
+    width: 95%;
+}
+
+.buttons {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    display: flex;
+}
+
+.sd-bar-btn {
+    margin-top: 100px;
 }
 
 .chat-area p {
     margin-bottom: 10px;
+    text-align: center;
+    color: white;
+    font-size: x-large;
+    margin-bottom: 25px;
+
 }
 
 .chat-area ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    color: white;
 }
 
 .chat-area button {
     margin-right: 10px;
     margin-bottom: 10px;
+    background: #dd5f0d;
+    border: 1px solid #dd5f0d;
+    color: white;
+
+}
+
+.chat-area button:hover {
+    color: black;
 }
 
 .messages {
@@ -74,6 +126,7 @@ body, html {
     max-width: 80%; /* Limit text block width */
     padding: 10px;
     border-radius: 10px;
+
 }
 
 .response-item.user-message {
@@ -86,6 +139,7 @@ body, html {
     background-color: #dd5f0d; /* User message background color */
     color: #fff; /* Text color */
     align-content: end; /* Align user messages to the right */
+
 }
 
 .response-item.chatbot-message {
@@ -129,9 +183,10 @@ body, html {
 }
 
 .user-input {
-    background-color: #fff; /* White background for input area */
     border-top: 1px solid #ccc; /* Gray border on top */
     z-index: 1000; /* Ensure input area is on top */
+    border: 1px solid red;
+
 }
 
 .user-input textarea {
@@ -139,11 +194,13 @@ body, html {
     border: none; /* Remove border */
     width: calc(100% - 100px); /* Adjust width */
     min-height: 50px; /* Minimum height */
+
 }
 
 .user-input button {
     width: 100px; /* Button width */
     border-radius: 0 5px 5px 0; /* Rounded corners */
+
 }
 
 /* Typing Bubble Styles */
@@ -151,6 +208,45 @@ body, html {
     background-color: #e0e0e0;
     color: #555;
     font-style: italic;
+}
+
+.col-md-9 {
+    background-color: #5e5c5c;
+    padding: 0;
+}
+
+.user-box {
+    display: flex;
+    width: 90%;
+    display: flex;
+    text-align: center;
+    height: 8%;
+    position: fixed;
+    bottom: 10px;
+    margin: 20px;
+}
+
+.text-box {
+    width: 75%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    height: 90%;
+    vertical-align: middle;
+    
+}
+
+.send-button {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #dd5f0d;
+    color: white;
+    height: 90%;
+}
+
+.tw-toggle {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 /* Media query for smaller screens */
