@@ -17,9 +17,7 @@ model = AutoModelForCausalLM.from_pretrained(
                                              pad_token_id=tokenizer.eos_token_id,
                                              device_map = "auto", 
                                              trust_remote_code=True, 
-                                             quantization_config=quantization_config,
-                                             max_new_tokens=1024
-                                
+                                             quantization_config=quantization_config                                
                                              )
 
 
