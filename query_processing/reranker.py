@@ -29,4 +29,4 @@ class MaxSimReranker:
 
         ranked_indices = torch.argsort(torch.tensor(scores), descending=True)
         # print(scores)   
-        return [documents['documents'][0][i] for i in ranked_indices]
+        return [(documents['documents'][0][i], documents['metadatas'][0][i]) for i in ranked_indices]
