@@ -9,7 +9,7 @@ from query_processing.generation import generate_gpt, generate_llama
 from query_processing.summarizer import summarize
 
 hallucination_response = "I'm sorry, I don't have enough information to answer that question. "
-def process_query(query, , model_selection, summary=''):
+def process_query(query, model_selection, summary=''):
     # Step 1: Query Expansion
     decorated_query = decorate_query(query)
     expanded_queries = get_expanded_queries(decorated_query)
