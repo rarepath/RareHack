@@ -116,10 +116,8 @@ body, html {
 
 /* Response Item Styles */
 .response-item {
-    margin-bottom: 10px;
     clear: both;
     overflow: hidden;
-    padding: 10px 15px;
     border-radius: 15px;
     font-size: 14px;
     max-width: 80%; /* Adjust maximum width of the bubble */
@@ -137,11 +135,13 @@ body, html {
 
 .response-item.user-message {
     float: right;
-    background-color: #dd5f0d; /* Light grey */
+    background-color: darkgray;
     color: #333;
     padding: 10px 15px; /* Adjust padding as needed */
     justify-content: flex-end; /* Align user messages to the right */
     text-align: right; /* Ensure text within the message is right-aligned */
+    width: auto%;
+    margin-right: 3%;
 }
 
 .response-item.user-message .text-block {
@@ -152,17 +152,14 @@ body, html {
 }
 
 .response-item.chatbot-message {
-    display: flex; /* Ensure chatbot messages are flex items */
-    flex-wrap: wrap; /* Allow wrapping to the next line if needed */
     float: left;
     justify-content: flex-start;
-    font-family: Arial, sans-serif;
-    font-size: 1.2rem;
     overflow: hidden; /* Ensures text doesn't overflow */
     border-right: 2px solid transparent; /* Creates cursor effect */
     animation: typing 1s steps(40), blink-caret 0.75s;
     background-color: black;
-    width: 50%;
+    width: 45%;
+    margin-left: 3%;
 }
 
 @keyframes typing {
@@ -170,7 +167,7 @@ body, html {
       width: 0;
     }
     to {
-      width: 50%;
+      width: 45%;
     }
   }
   
