@@ -29,7 +29,10 @@ def process_query(query, model_selection, summary=''):
     ranked_documents = MaxSimReranker().rank_documents(decorated_query, retrieved_docs)
     # print(ranked_documents)
     # Step 5: Response Generation
-    urls = [doc[1]['URL'] for doc in ranked_documents[:3]]
+    try:
+        urls = [doc[1]['URL'] for doc in ranked_documents[:3]]
+    except:
+        urls = []
     if model_selection == "gpt":
         gpt_response = generate_gpt(decorated_query, ranked_documents[:3], summary)
         # is_hallucinating_gpt = check_hallucination(gpt_response, decorated_query, ranked_documents[:3])
