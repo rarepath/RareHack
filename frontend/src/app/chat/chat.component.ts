@@ -59,6 +59,9 @@ export class ChatComponent {
             },
             error: error => {
                 console.error('Error fetching chatbot response:', error);
+                let errorString: string = "I'm sorry, I'm experiencing technical difficulties right now. Please try again."
+                this.appendMessage("error", [errorString])
+                this.isThinking = false;
             },
       });
     }
