@@ -100,9 +100,9 @@ def generate_gpt(query, context, summary):
                 },
                 {
                     "role": "user", 
-                    "content": f'''Question: {query} Context: {context}''' 
+                    "content": f'''Question: {query} Context: {context}'''
                 }
-            ],
+            ]
     else:
         messages = [
                 {

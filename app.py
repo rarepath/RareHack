@@ -33,7 +33,7 @@ def get_response():
         response = jsonify(rlist)
         return response
     elif model_selection == "llama":
-        llama_response, = chatbot_response[0]
+        llama_response = chatbot_response[0]
         urls = chatbot_response[1]
         llama_resp_obj = {
         "agentName": "llama-3",
