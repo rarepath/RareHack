@@ -19,7 +19,7 @@ def get_response():
 
     # response: [gpt_response, llama_response, summary]
     # model response object: {"agentName": "", "agentResp": "", "urls": [], "summary": ""}
-    chatbot_response = process_query(user_input, current_summary)
+    chatbot_response = process_query(user_input, model_selection, current_summary)
 
     gpt_response = chatbot_response[0]
     llama_response = chatbot_response[1]

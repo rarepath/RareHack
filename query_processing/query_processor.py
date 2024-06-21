@@ -8,7 +8,8 @@ from query_processing.hallucination_grader import check_hallucination
 from query_processing.generation import generate_gpt, generate_llama
 from query_processing.summarizer import summarize
 
-def process_query(query, summary=''):
+hallucination_response = "I'm sorry, I don't have enough information to answer that question. "
+def process_query(query, , model_selection, summary=''):
     # Step 1: Query Expansion
     decorated_query = decorate_query(query)
     expanded_queries = get_expanded_queries(decorated_query)
@@ -28,20 +29,39 @@ def process_query(query, summary=''):
     ranked_documents = MaxSimReranker().rank_documents(decorated_query, retrieved_docs)
     # print(ranked_documents)
     # Step 5: Response Generation
-    gpt_response = generate_gpt(decorated_query, ranked_documents[:3])
-    llama_response = generate_llama(decorated_query, ranked_documents[:3])
+
+    if model_selection == "gpt":
+        gpt_response = generate_gpt(decorated_query, ranked_documents[:3])
+        is_hallucinating_gpt = check_hallucination(gpt_response, decorated_query, ranked_documents[:3])
+        if is_hallucinating_gpt:
+            gpt_response = hallucination_response
+
+        summary = summarize(decorated_query, gpt_response)
+        return [gpt_response, summary]
+
+    elif model_selection == "llama":
+        llama_response = generate_llama(decorated_query, ranked_documents[:3])
+        is_hallucinating_llama = check_hallucination(llama_response, decorated_query, ranked_documents[:3])
+        if is_hallucinating_llama:
+            llama_response = hallucination_response
+        summary = summarize(decorated_query, llama_response)
+        return [llama_response, summary]
+    
+    else:
+        gpt_response = generate_gpt(decorated_query, ranked_documents[:3])
+        is_hallucinating_gpt = check_hallucination(gpt_response, decorated_query, ranked_documents[:3])
+        if is_hallucinating_gpt:
+            gpt_response = hallucination_response
+
+        llama_response = generate_llama(decorated_query, ranked_documents[:3])
+        is_hallucinating_llama = check_hallucination(llama_response, decorated_query, ranked_documents[:3])
+        if is_hallucinating_llama:
+            llama_response = hallucination_response
+
+        summary = summarize(decorated_query, gpt_response, llama_response)
+        return [gpt_response, llama_response, summary]
 
 
-    # # Step 6: Hallucination Detection
-    is_hallucinating_llama = check_hallucination(llama_response, decorated_query, ranked_documents[:3])
-    is_hallucinating_gpt = check_hallucination(gpt_response, decorated_query, ranked_documents[:3])
-
-    # print("llama:", is_hallucinating_llama) 
-    # print("gpt:", is_hallucinating_gpt) 
-    # # Step 7: Response Post-processing
-    summary = summarize(decorated_query, gpt_response)
-    # # Step 8: Return response and response code
-    return [gpt_response, llama_response, summary]
 
 
 
