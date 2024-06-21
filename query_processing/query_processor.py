@@ -42,7 +42,7 @@ def process_query(query, model_selection, summary=''):
         summary = summarize(decorated_query, gpt_response)
         return [gpt_response, urls, decorated_query + summary]
 
-    elif model_selection == "Llama3":
+    elif model_selection == "llama":
         llama_response = generate_llama(decorated_query, ranked_documents[:3], summary)
         # is_hallucinating_llama = check_hallucination(llama_response, decorated_query, ranked_documents[:3])
         # if is_hallucinating_llama:
