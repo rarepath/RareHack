@@ -49,7 +49,7 @@ def get_response():
       llama_response = chatbot_response[1]
       urls = chatbot_response[2]  
       gpt_resp_obj = gpt_response = {
-      "agentName": "GPT-4-turbo",
+      "agentName": "GPT-4o",
       "agentResponse": gpt_response,
       "urls": urls
       }

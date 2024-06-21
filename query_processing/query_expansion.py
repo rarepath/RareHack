@@ -17,7 +17,7 @@ class ParaphrasedQuery(BaseModel):
 def decorate_query(query):
     """Decorate the query by expanding any abbreviations."""
     system = """You are an expert at converting abbreviations in a user query to their full forms.\
-        Remember that the abbrevations are always related to the diseases Hypophosphatasia and ehler's danlos syndrome.\
+        Remember that the abbrevations are always related to the diseases Hypophosphatasia and Ehler's Danlos syndrome.\
         Substitute the full form in the original query.
         \
         \

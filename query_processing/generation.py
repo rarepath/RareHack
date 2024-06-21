@@ -17,7 +17,9 @@ model = AutoModelForCausalLM.from_pretrained(
                                              pad_token_id=tokenizer.eos_token_id,
                                              device_map = "auto", 
                                              trust_remote_code=True, 
-                                             quantization_config=quantization_config
+                                             quantization_config=quantization_config,
+                                             max_new_tokens=1024
+                                
                                              )
 
 
@@ -125,7 +127,7 @@ def generate_gpt(query, context, summary):
         model="gpt-4o",
         messages= messages,
         temperature=0.3,
-        max_tokens=700
+        max_tokens=250
 
         )
 
