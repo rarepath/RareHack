@@ -125,7 +125,7 @@ def generate_gpt(query, context, summary):
     try:
         openai_response = openai.chat.completions.create(
         model="gpt-4",
-        messages= messages
+        messages= messages,
         temperature=0.3,
         max_tokens=700
     )
