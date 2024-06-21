@@ -17,7 +17,7 @@ export class ChatComponent {
     userInput: string = '';
     modelSelection: string = 'both';
     currentSummary: string = '';
-    isTyping: boolean = false;
+    isThinking: boolean = false;
 
     // messages to be displayed
     messages: { sender: string, text: string[] }[] = [];
@@ -29,8 +29,8 @@ export class ChatComponent {
         const userInput = exampleQuestion ? exampleQuestion.trim() : this.userInput.trim();
         if (!userInput) return;
 
-        this.appendMessage('user', [userInput]);
-        this.isTyping = true;
+        this.appendMessage('user', ["User: " + userInput]);
+        this.isThinking = true;
         this.userInput = '';
         const messagePayload = {
             userQuery: userInput,
@@ -39,7 +39,7 @@ export class ChatComponent {
 
         this.chatService.sendMessage(messagePayload).subscribe({
             next: data => {
-                this.isTyping = false;
+                this.isThinking = false;
                 let res: string[] = [];
                 // iterate across agent responses (indices 0 & 1)
                 for (let i = 0; i < data.length - 1; i ++ ) {
@@ -83,6 +83,7 @@ export class ChatComponent {
 
     // clear message history for new chat
     newChat(): void {
+        this.isThinking = false;
         this.messages = [];
     }
 }

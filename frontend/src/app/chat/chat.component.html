@@ -61,13 +61,12 @@
                 <div class="messages" [ngClass]="{'single-message': messages.length === 1}">
                     <div *ngFor="let message of messages" class="response-item" [ngClass]="{'user-message': message.sender === 'user', 'chatbot-message': message.sender !== 'user'}">
                         <div *ngFor="let response of message.text" class="response">
-                            <p [innerHTML]="message.sender"></p>
                             <p [innerHTML]="response" id="agentResponse"></p>
                         </div>
                     </div>
                     <!-- Typing Bubble -->
-                    <div *ngIf="isTyping" class="response-item chatbot-message typing-bubble">
-                        <div class="response">
+                    <div *ngIf="isThinking" class="response-item chatbot-message typing-bubble">
+                        <div class="thinking">
                             <p>Thinking...</p>
                         </div>
                     </div>

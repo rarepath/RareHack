@@ -2,7 +2,7 @@
 body, html {
     height: 100%;
     font-family: Arial, sans-serif;
-    background-color: rgb(75, 75, 75); /* Light gray background */
+    background-color: rgb(246, 179, 179); /* Light gray background */
 }
 
 
@@ -241,6 +241,10 @@ body, html {
     background-color: #dd5f0d;
     color: white;
     height: 90%;
+}
+
+.thinking {
+    align-items: flex-start;
 }
 
 .tw-toggle {
