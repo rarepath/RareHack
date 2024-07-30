@@ -1,5 +1,6 @@
 venv
 chromadb
+ui
 *.log
 __pycache__
 rare-hack-env

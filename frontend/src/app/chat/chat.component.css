@@ -55,7 +55,6 @@ body, html {
 
 .chat-area {
     overflow-y: auto; /* Enable vertical scrolling */
-    margin-top: 150px;
     width: 100%;
 }
 
@@ -137,7 +136,6 @@ body, html {
     float: right;
     background-color: darkgray;
     color: #333;
-    padding: 10px 15px; /* Adjust padding as needed */
     justify-content: flex-end; /* Align user messages to the right */
     text-align: right; /* Ensure text within the message is right-aligned */
     width: auto%;
@@ -222,7 +220,6 @@ body, html {
 
 .col-md-9 {
     background-color: #5e5c5c;
-    padding: 0;
 }
 
 .user-box {
@@ -273,7 +270,5 @@ body, html {
         width: 100%; /* Full width sidebar */
     }
 
-    .chat-area {
-        flex: 1; /* Expand chat area to fill remaining space */
-    }
+    
 }
