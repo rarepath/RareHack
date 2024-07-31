@@ -2,10 +2,10 @@
 body, html {
     height: 100%;
     font-family: Arial, sans-serif;
-    background-color: rgb(246, 179, 179); /* Light gray background */
+    background-color: rgb(75, 75, 75); /* Darker background */
+    margin: 0;
+    overflow: hidden;
 }
-
-
 
 .container-fluid {
     display: flex;
@@ -14,17 +14,17 @@ body, html {
 }
 
 .row {
-    flex: 1; /* Make the row fill remaining vertical space */
+    flex: 1;
     display: flex;
-    overflow: hidden; /* Hide overflow from sidebar and main content */
-    background-color:  rgb(75, 75, 75);
+    overflow: hidden;
+    background-color: rgb(75, 75, 75); /* Consistent background */
 }
 
 .sidebar {
-    background-color: black; /* Sidebar background color */
+    background-color: black;
     border-top-right-radius: 3%;
     border-bottom-right-radius: 3%;
-    color: #fff; /* Text color */
+    color: #fff;
     padding: 20px;
 }
 
@@ -34,7 +34,6 @@ body, html {
     margin-bottom: 20px;
     text-align: center;
     margin-top: 50px;
-
 }
 
 .sidebar button {
@@ -53,222 +52,122 @@ body, html {
     color: black;
 }
 
+/* Chat area styling */
 .chat-area {
-    overflow-y: auto; /* Enable vertical scrolling */
-    width: 100%;
-}
-
-.example-btn {
-    width: 75%;
-}
-
-.btn {
-    width: 95%;
-}
-
-.buttons {
-    width: 80%;
-    margin: auto;
-    text-align: center;
-    align-items: center;
-    display: flex;
-}
-
-.sd-bar-btn {
-    margin-top: 100px;
-}
-
-.chat-area p {
-    margin-bottom: 10px;
-    text-align: center;
-    color: white;
-    font-size: x-large;
-    margin-bottom: 25px;
-
-}
-
-.chat-area ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    color: white;
-}
-
-.chat-area button {
-    margin-right: 10px;
-    margin-bottom: 10px;
-    background: #dd5f0d;
-    border: 1px solid #dd5f0d;
-    color: white;
-
-}
-
-.chat-area button:hover {
-    color: black;
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: rgb(75, 75, 75);
 }
 
 .messages {
-    overflow-y: auto; /* Enable scrolling for messages */
-    max-height: 60vh; /* Limit height for messages area */
-    padding-right: 20px; /* Provide space for scrollbar */
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 0 20px;
 }
 
-/* Response Item Styles */
+/* Template questions styling */
+.template-questions {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 15px; /* Rounded corners */
+    background-color: #333; /* Dark gray background */
+    color: #fff; /* White text */
+    font-size: 16px; /* Slightly larger font size */
+    font-weight: bold; /* Bold text for emphasis */
+    max-width: 75%;
+    word-wrap: break-word;
+    display: inline-block;
+}
+
+.template-questions p {
+    margin: 5px 0;
+}
+
+/* Message bubbles styling */
 .response-item {
     clear: both;
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: 15px; /* Rounded corners for consistency */
     font-size: 14px;
-    max-width: 80%; /* Adjust maximum width of the bubble */
-    word-wrap: break-word; /* Ensure long words break and wrap */
-    display: inline-block; /* Display bubbles inline */
-}
-
-.response-item .text-block {
-    display: inline-block;
-    max-width: 80%; /* Limit text block width */
+    max-width: 75%;
+    margin-bottom: 10px;
     padding: 10px;
-    border-radius: 10px;
-
+    word-wrap: break-word;
+    display: inline-block;
 }
 
 .response-item.user-message {
+    background-color: #dd5f0d;
+    color: #fff;
     float: right;
-    background-color: darkgray;
-    color: #333;
-    justify-content: flex-end; /* Align user messages to the right */
-    text-align: right; /* Ensure text within the message is right-aligned */
-    width: auto%;
-    margin-right: 3%;
-}
-
-.response-item.user-message .text-block {
-    background-color: #dd5f0d; /* User message background color */
-    color: #fff; /* Text color */
-    align-content: end; /* Align user messages to the right */
-
+    text-align: left;
+    border-radius: 15px 15px 0px 15px;
 }
 
 .response-item.chatbot-message {
+    background-color: #f0f0f0;
+    color: #000;
     float: left;
-    justify-content: flex-start;
-    overflow: hidden; /* Ensures text doesn't overflow */
-    border-right: 2px solid transparent; /* Creates cursor effect */
-    animation: typing 1s steps(40), blink-caret 0.75s;
-    background-color: black;
-    width: 45%;
-    margin-left: 3%;
+    text-align: left;
+    border-radius: 15px 15px 15px 0px;
 }
 
-@keyframes typing {
-    from {
-      width: 0;
-    }
-    to {
-      width: 45%;
-    }
-  }
-  
-  @keyframes blink-caret {
-    from, to {
-      border-color: transparent;
-    }
-    50% {
-      border-color: black;
-    }
-  }
-
-.response-item.chatbot-message .text-block {
-    background-color: #f0f0f0; /* Chatbot message background color */
-    color: #000; /* Text color */
-    flex: 1; /* Allow each response to grow and shrink as needed */
-    margin: 5px; /* Add some margin between responses */
-}
-
-.response-item.chatbot-message .response {
-    flex: 1;
-    margin: 5px;
-}
-
+/* User input area */
 .user-input {
-    border-top: 1px solid #ccc; /* Gray border on top */
-    z-index: 1000; /* Ensure input area is on top */
-    border: 1px solid red;
-
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+    margin: 0 10px 10px 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for effect */
 }
 
 .user-input textarea {
-    resize: none; /* Disable textarea resizing */
-    border: none; /* Remove border */
-    width: calc(100% - 100px); /* Adjust width */
-    min-height: 50px; /* Minimum height */
-
+    resize: none;
+    border: none;
+    width: calc(100% - 100px);
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    font-size: 14px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+    height: 40px; /* Ensure single-line height */
+    overflow: hidden; /* Prevents multi-line display */
 }
 
 .user-input button {
-    width: 100px; /* Button width */
-    border-radius: 0 5px 5px 0; /* Rounded corners */
-
-}
-
-/* Typing Bubble Styles */
-.typing-bubble .text-block {
-    background-color: #e0e0e0;
-    color: #555;
-    font-style: italic;
-}
-
-.col-md-9 {
-    background-color: #5e5c5c;
-}
-
-.user-box {
-    display: flex;
-    width: 90%;
-    display: flex;
-    text-align: center;
-    height: 8%;
-    position: fixed;
-    bottom: 10px;
-    margin: 20px;
-}
-
-.text-box {
-    width: 75%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    height: 90%;
-    vertical-align: middle;
-    
-}
-
-.send-button {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    width: 100px;
+    border: none;
     background-color: #dd5f0d;
     color: white;
-    height: 90%;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 14px;
+    height: 40px; /* Match height of textarea */
 }
 
-.thinking {
-    align-items: flex-start;
+.user-input button:hover {
+    background-color: #e76b27;
 }
 
-.tw-toggle {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-
-/* Media query for smaller screens */
 @media (max-width: 768px) {
     .row {
-        flex-direction: column; /* Stack columns on smaller screens */
+        flex-direction: column;
     }
 
     .sidebar {
-        width: 100%; /* Full width sidebar */
+        width: 100%;
     }
 
-    
+    .user-input {
+        width: calc(100% - 20px);
+        margin: 0 10px;
+    }
 }
