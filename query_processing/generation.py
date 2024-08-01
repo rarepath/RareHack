@@ -14,16 +14,16 @@ accept = 'application/json'
 contentType = 'application/json'
 
 
-quantization_config = QuantoConfig(weights="float8")
+# quantization_config = QuantoConfig(weights="float8")
 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(
-                                             model_name, 
-                                             pad_token_id=tokenizer.eos_token_id,
-                                             device_map = "auto", 
-                                             trust_remote_code=True, 
-                                             quantization_config=quantization_config                                
-                                             )
+# tokenizer = AutoTokenizer.from_pretrained(model_name)
+# model = AutoModelForCausalLM.from_pretrained(
+#                                              model_name, 
+#                                              pad_token_id=tokenizer.eos_token_id,
+#                                              device_map = "auto", 
+#                                              trust_remote_code=True, 
+#                                              quantization_config=quantization_config                                
+#                                              )
 
 
 
