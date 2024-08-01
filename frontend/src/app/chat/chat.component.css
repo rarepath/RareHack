@@ -64,10 +64,11 @@ body, html {
     overflow-y: auto; /* Enable vertical scrolling */
     padding: 20px;
     background-color: rgb(75, 75, 75);
+    margin-bottom: 60px; /* Space for the input box */
 }
 
 .messages {
-    max-height: 70vh; /* Limit height for messages area */
+    max-height: calc(100vh - 60px); /* Limit height for messages area */
     overflow-y: auto; /* Enable scrolling for messages */
     padding: 0 20px;
 }
@@ -128,7 +129,7 @@ body, html {
 }
 
 /* User input area */
-.user-input {
+.user-box {
     display: flex;
     align-items: center;
     padding: 10px;
@@ -136,14 +137,14 @@ body, html {
     border-top: 1px solid #ccc;
     position: fixed;
     bottom: 0;
-    width: calc(100% - 20px);
+    width: calc(100% - 320px); /* Adjust width to account for sidebar */
     box-sizing: border-box;
-    margin: 0 10px 10px 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for effect */
+    margin: 0;
+    border-radius: 0 0 5px 5px; /* Rounded bottom corners */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-.user-input textarea {
+.user-box textarea {
     resize: none; /* Disable textarea resizing */
     border: none; /* Remove border */
     width: calc(100% - 100px);
@@ -156,7 +157,7 @@ body, html {
     overflow: hidden; /* Prevents multi-line display */
 }
 
-.user-input button {
+.user-box button {
     width: 100px; /* Button width */
     border: none;
     background-color: #dd5f0d;
@@ -167,7 +168,7 @@ body, html {
     height: 40px; /* Match height of textarea */
 }
 
-.user-input button:hover {
+.user-box button:hover {
     background-color: #e76b27;
 }
 
@@ -187,8 +188,8 @@ body, html {
         width: 100%; /* Full width sidebar */
     }
 
-    .user-input {
-        width: calc(100% - 20px);
-        margin: 0 10px;
+    .user-box {
+        width: 100%;
+        border-radius: 0; /* Remove border-radius for full width */
     }
 }
