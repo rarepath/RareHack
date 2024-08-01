@@ -2,60 +2,47 @@
     <div class="row">
         <div class="col-md-3 sidebar">
             <!-- Sidebar content -->
-            <div class="logo">Rare Path Chat Agent</div>
+            <div class="logo">RADIANT</div>
             <div class="sd-bar-btn">
                 <button (click)="newChat()" class="btn-side">New Chat</button>
-                <!-- <button [routerLink]="['/about-us']" class="bt-side">About Us</button> -->
                 <button [routerLink]="['']" class="btn-side">Home</button>
             </div>
-            
-            
-            <!-- Three-way toggle for model selection -->
             <div class="tw-toggle">
                 <p><strong>Which model would you like to see a response from?</strong></p>
                 <label>
                   <input type="radio" name="toggle" value="gpt" (change)="updateModelSelection($event)">
                   GPT-4o
                 </label>
-                
                 <label>
                   <input type="radio" name="toggle" value="llama" (change)="updateModelSelection($event)">
                   Llama 3
                 </label>
-                
                 <label>
                   <input type="radio" name="toggle" value="both" checked (change)="updateModelSelection($event)">
-                  <!-- No image associated with "both" option -->
                   Both
                 </label>
-                
-                <span></span>
               </div>
-              
-              
-              
-            
-            
         </div>
         
         <div class="col-md-9">
             <div class="chat-area">
                 <!-- Display example questions when no messages -->
                 <ng-container *ngIf="messages.length === 0">
-                    <p>
+                    <p style="font-size: 24px; font-weight: bold;">
                         Hi! How can I help you today? Here are some example questions you can ask me:
                     </p>
-                    <div class="buttons">
-                        <ul class="example-btn">
-                            <button class="btn" (click)="sendMessage('What are the symptoms of HPP?')">What are the symptoms of HPP?</button>
-                            <button class="btn" (click)="sendMessage('I have a patient that I think has clEDS. What tests should I run to confirm?')" >I have a patient that I think has clEDS. What tests should I run to confirm?</button>
-                        </ul>
-                        <ul class="example-btn">
-                            <button class="btn" (click)="sendMessage('I think I might have HPP. What are the symptoms I should look for?')" >I think I might have HPP. What are the symptoms I should look for?</button>
-                            <button class="btn" (click)="sendMessage('Is EDS hereditary?')" >Is EDS hereditary?</button>
-                        </ul>
+                    <div class="template-questions">
+                        <button class="btn" (click)="sendMessage('What are the symptoms of HPP?')">What are the symptoms of HPP?</button>
                     </div>
-                    
+                    <div class="template-questions">
+                        <button class="btn" (click)="sendMessage('I have a patient that I think has clEDS. What tests should I run to confirm?')">I have a patient that I think has clEDS. What tests should I run to confirm?</button>
+                    </div>
+                    <div class="template-questions">
+                        <button class="btn" (click)="sendMessage('I think I might have HPP. What are the symptoms I should look for?')">I think I might have HPP. What are the symptoms I should look for?</button>
+                    </div>
+                    <div class="template-questions">
+                        <button class="btn" (click)="sendMessage('Is EDS hereditary?')">Is EDS hereditary?</button>
+                    </div>
                 </ng-container>
                 
                 <div class="messages" [ngClass]="{'single-message': messages.length === 1}">

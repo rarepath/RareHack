@@ -2,7 +2,7 @@
 body, html {
     height: 100%;
     font-family: Arial, sans-serif;
-    background-color: rgb(75, 75, 75); /* Darker background */
+    background-color: rgb(75, 75, 75); /* Consistent dark background */
     margin: 0;
     overflow: hidden;
 }
@@ -16,15 +16,15 @@ body, html {
 .row {
     flex: 1;
     display: flex;
-    overflow: hidden;
+    overflow: hidden; /* Hide overflow from sidebar and main content */
     background-color: rgb(75, 75, 75); /* Consistent background */
 }
 
 .sidebar {
-    background-color: black;
+    background-color: black; /* Sidebar background color */
     border-top-right-radius: 3%;
     border-bottom-right-radius: 3%;
-    color: #fff;
+    color: #fff; /* Text color */
     padding: 20px;
 }
 
@@ -52,36 +52,43 @@ body, html {
     color: black;
 }
 
+/* New styles for vertical radio buttons */
+.tw-toggle label {
+    display: block; /* Makes each label take up the full width */
+    margin-bottom: 10px; /* Adds spacing between the labels */
+}
+
 /* Chat area styling */
 .chat-area {
     flex: 1;
-    overflow-y: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
     padding: 20px;
     background-color: rgb(75, 75, 75);
 }
 
 .messages {
-    max-height: 70vh;
-    overflow-y: auto;
+    max-height: 70vh; /* Limit height for messages area */
+    overflow-y: auto; /* Enable scrolling for messages */
     padding: 0 20px;
 }
 
-/* Template questions styling */
+/* Template Questions Styling */
 .template-questions {
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 15px;
     border-radius: 15px; /* Rounded corners */
-    background-color: #333; /* Dark gray background */
-    color: #fff; /* White text */
-    font-size: 16px; /* Slightly larger font size */
+    background-color: #dd5f0d; /* Bright orange background */
+    color: #fff; /* White text for contrast */
+    font-size: 18px; /* Larger font size for visibility */
     font-weight: bold; /* Bold text for emphasis */
-    max-width: 75%;
+    max-width: 80%;
     word-wrap: break-word;
     display: inline-block;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
 .template-questions p {
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 /* Message bubbles styling */
@@ -90,27 +97,34 @@ body, html {
     overflow: hidden;
     border-radius: 15px; /* Rounded corners for consistency */
     font-size: 14px;
-    max-width: 75%;
+    max-width: 80%; /* Adjust maximum width of the bubble */
     margin-bottom: 10px;
     padding: 10px;
-    word-wrap: break-word;
-    display: inline-block;
+    word-wrap: break-word; /* Ensure long words break and wrap */
+    display: inline-block; /* Display bubbles inline */
 }
 
 .response-item.user-message {
-    background-color: #dd5f0d;
-    color: #fff;
+    background-color: #dd5f0d; /* User message background color */
+    color: #fff; /* Text color */
     float: right;
     text-align: left;
     border-radius: 15px 15px 0px 15px;
 }
 
 .response-item.chatbot-message {
-    background-color: #f0f0f0;
-    color: #000;
+    background-color: #f0f0f0; /* Chatbot message background color */
+    color: #000; /* Text color */
     float: left;
     text-align: left;
     border-radius: 15px 15px 15px 0px;
+}
+
+.response-item .text-block {
+    display: inline-block;
+    max-width: 80%; /* Limit text block width */
+    padding: 10px;
+    border-radius: 10px;
 }
 
 /* User input area */
@@ -130,8 +144,8 @@ body, html {
 }
 
 .user-input textarea {
-    resize: none;
-    border: none;
+    resize: none; /* Disable textarea resizing */
+    border: none; /* Remove border */
     width: calc(100% - 100px);
     padding: 10px;
     border-radius: 5px 0 0 5px;
@@ -143,11 +157,11 @@ body, html {
 }
 
 .user-input button {
-    width: 100px;
+    width: 100px; /* Button width */
     border: none;
     background-color: #dd5f0d;
     color: white;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0; /* Rounded corners */
     cursor: pointer;
     font-size: 14px;
     height: 40px; /* Match height of textarea */
@@ -157,13 +171,20 @@ body, html {
     background-color: #e76b27;
 }
 
+/* Typing Bubble Styles */
+.typing-bubble .text-block {
+    background-color: #e0e0e0;
+    color: #555;
+    font-style: italic;
+}
+
 @media (max-width: 768px) {
     .row {
-        flex-direction: column;
+        flex-direction: column; /* Stack columns on smaller screens */
     }
 
     .sidebar {
-        width: 100%;
+        width: 100%; /* Full width sidebar */
     }
 
     .user-input {
