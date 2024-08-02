@@ -14,18 +14,18 @@ CORS(app, supports_credentials=True, origins=["https://localhost:4200"])
 @app.route('/get_response', methods=['POST', 'OPTIONS'])
 @cross_origin(origin='http://localhost:4200', supports_credentials=True)  # Ensure correct origin
 def get_response():
-    if request.method == 'OPTIONS':
-        response = app.make_default_options_response()
-        response.headers.add("Access-Control-Allow-Origin", "http://localhost:4200")
-        response.headers.add("Access-Control-Allow-Credentials", "true")
-        response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
-        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
-        return response
+    model_selection = request.json['modelSelection']
+    user_input = request.json['userQuery']
+    current_summary = request.json['currentSummary']
 
-    if request.method == 'POST':
-        gpt_response = "generic gpt response"
-        llama_response = "generic llama response"
-        urls = ["url1", 'url2', 'url3']
+    # response: [gpt_response, llama_response, summary]
+    # model response object: {"agentName": "", "agentResp": "", "urls": [], "summary": ""}
+
+
+    chatbot_response = process_query(user_input, model_selection, current_summary)
+    if model_selection == "gpt":
+        gpt_response = chatbot_response[0]
+        urls = chatbot_response[1]
         gpt_resp_obj = {
         "agentName": "GPT-4o",
         "agentResponse": gpt_response,

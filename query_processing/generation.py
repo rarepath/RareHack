@@ -4,41 +4,46 @@ import openai
 from langchain_openai import ChatOpenAI
 from langchain_community.llms import Ollama
 from transformers import AutoModelForCausalLM, AutoTokenizer, QuantoConfig
-import torch
 from query_processing.model_config import model_name
-from langchain_huggingface import HuggingFacePipeline
+import boto3
+import json
+
+bedrock_client = boto3.client("bedrock-runtime")
+modelId = 'meta.llama3-70b-instruct-v1:0'
+accept = 'application/json'
+contentType = 'application/json'
 
 
-quantization_config = QuantoConfig(weights="float8")
+# quantization_config = QuantoConfig(weights="float8")
 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(
-                                             model_name, 
-                                             pad_token_id=tokenizer.eos_token_id,
-                                             device_map = "auto", 
-                                             trust_remote_code=True, 
-                                             quantization_config=quantization_config                                
-                                             )
+# tokenizer = AutoTokenizer.from_pretrained(model_name)
+# model = AutoModelForCausalLM.from_pretrained(
+#                                              model_name, 
+#                                              pad_token_id=tokenizer.eos_token_id,
+#                                              device_map = "auto", 
+#                                              trust_remote_code=True, 
+#                                              quantization_config=quantization_config                                
+#                                              )
 
 
 
-def get_formatted_input(messages, context):
-    system = """System: You are an expert in Question and Answering tasks specifically regarding rare diseases, focusing on Hypophosphatasia and Ehlers-Danlos Syndrome. 
-        You will be given relevant context to answer user queries. 
-        Answer the user query only using the given context and ensure your response is accurate, clear, and concise. 
-        Do not mention in your response that you were given context."""
-    instruction = "Please give a full and complete answer for the question."
+# def get_formatted_input(messages, context):
+#     system = """System: You are an expert in Question and Answering tasks specifically regarding rare diseases, focusing on Hypophosphatasia and Ehlers-Danlos Syndrome. 
+#         You will be given relevant context to answer user queries.
+#         Answer the user query only using the given context and ensure your response is accurate, clear, and concise.
+#         Do not mention in your response that you were given context."""
+#     instruction = "Please give a full and complete answer for the question."
 
-    for item in messages:
-        if item['role'] == "user":
-            ## only apply this instruction for the first user turn
-            item['content'] = instruction + " " + item['content']
-            break
+#     for item in messages:
+#         if item['role'] == "user":
+#             ## only apply this instruction for the first user turn
+#             item['content'] = instruction + " " + item['content']
+#             break
 
-    conversation = '\n\n'.join(["User: " + item["content"] if item["role"] == "user" else "Assistant: " + item["content"] for item in messages]) + "\n\nAssistant:"
-    formatted_input = system + "\n\n" + str(context) + "\n\n" + conversation
+#     conversation = '\n\n'.join(["User: " + item["content"] if item["role"] == "user" else "Assistant: " + item["content"] for item in messages]) + "\n\nAssistant:"
+#     formatted_input = system + "\n\n" + str(context) + "\n\n" + conversation
     
-    return formatted_input
+#     return formatted_input
 
 
 
@@ -71,21 +76,22 @@ def generate_llama(query, context, summary):
         input_variables=["question", "context"],
         )
 
-    messages = [
-    {"role": "user", "content": f"{query}"}
-    ]
 
-    formatted_input = get_formatted_input(messages, context)
-    tokenized_prompt = tokenizer(tokenizer.bos_token + formatted_input, return_tensors="pt").to(model.device)
-    terminators = [
-    tokenizer.eos_token_id,
-    tokenizer.convert_tokens_to_ids("<|eot_id|>")
-]
+    formatted_input = llama_prompt.format(question=query, context=context) 
 
-    outputs = model.generate(input_ids=tokenized_prompt.input_ids, attention_mask=tokenized_prompt.attention_mask, max_new_tokens=500, eos_token_id=terminators)
+    body = json.dumps({
+        "prompt": formatted_input,
+        "temperature": 0.1,
+        "top_p": 0.9,
+    })
 
-    response = outputs[0][tokenized_prompt.input_ids.shape[-1]:]
-    return tokenizer.decode(response, skip_special_tokens=True)
+    response = bedrock_client.invoke_model(body=body, modelId=modelId, accept=accept, contentType=contentType)
+
+    output = json.loads(response.get('body').read())
+
+# text
+
+    return output.get('generation')
 
 
 def generate_gpt(query, context, summary):
