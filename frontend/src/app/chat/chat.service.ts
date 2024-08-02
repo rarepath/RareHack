@@ -7,7 +7,7 @@ import { Observable, catchError } from 'rxjs';
 })
 export class ChatService {
 
-    private apiUrl: string = "https://radiant-test.rarepath.ai/api";
+    private apiUrl: string = "https://radiant.rarepath.ai/api";
 
     constructor(private http: HttpClient){}
 
