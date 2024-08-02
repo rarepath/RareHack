@@ -75,8 +75,11 @@ body, html {
 
 /* Template Questions Styling */
 .template-questions {
-    margin-bottom: 20px;
-    padding: 15px;
+
+    margin: 20px;
+    padding: 20px;
+
+    
     border-radius: 15px; /* Rounded corners */
     background-color: #dd5f0d; /* Bright orange background */
     color: #fff; /* White text for contrast */
@@ -89,7 +92,8 @@ body, html {
 }
 
 .template-questions p {
-    margin: 10px 0;
+    margin: 10px;
+    text-align: center;
 }
 
 /* Message bubbles styling */
@@ -130,18 +134,27 @@ body, html {
 
 /* User input area */
 .user-box {
+    width: 100%;
+    max-width: 1000px;
+    position:fixed;
+    bottom: 0;
+    left: 30%;
+    padding: 10px;
+    /* border-top: 1px solid #ddd;
+    background: #fff; */
     display: flex;
     align-items: center;
-    padding: 10px;
-    background-color: #fff;
-    border-top: 1px solid #ccc;
-    position: fixed;
-    bottom: 0;
-    width: calc(100% - 320px); /* Adjust width to account for sidebar */
-    box-sizing: border-box;
-    margin: 0;
-    border-radius: 0 0 5px 5px; /* Rounded bottom corners */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    /* padding: 100px; */
+    /* border-width: 100px; */
+
+
+}
+@media (min-width: 800px) {
+    .user-box {
+        max-width: 800px;
+        left: 50%;
+        transform: translateX(-30%);
+    }
 }
 
 .user-box textarea {
@@ -149,7 +162,7 @@ body, html {
     border: none; /* Remove border */
     width: calc(100% - 100px);
     padding: 10px;
-    border-radius: 5px 0 0 5px;
+    border-radius: 5px 5px 0 5px;
     outline: none;
     font-size: 14px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
