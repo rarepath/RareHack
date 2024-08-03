@@ -73,11 +73,11 @@ def generate_llama(query, context, summary):
             Summary: {summary}
             Context: {context}
             Assistant:""",
-        input_variables=["question", "context"],
+        input_variables=["question", "context", "summary"],
         )
 
 
-    formatted_input = llama_prompt.format(question=query, context=context) 
+    formatted_input = llama_prompt.render(question=query, context=context, summary=summary)
 
     body = json.dumps({
         "prompt": formatted_input,
