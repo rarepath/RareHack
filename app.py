@@ -3,7 +3,7 @@ import logging
 from flask_cors import CORS, cross_origin
 import time
 import os
-# from query_processing.query_processor import process_query
+from query_processing.query_processor import process_query
 logging.basicConfig(level=logging.DEBUG)
 
 # initialize Flask app
