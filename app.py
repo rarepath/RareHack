@@ -44,7 +44,7 @@ def get_response():
         llama_response = chatbot_response[0]
         urls = chatbot_response[1]
         llama_resp_obj = {
-        "agentName": "llama",
+        "agentName": "LlaMa-3",
         "agentResponse": llama_response,
         "urls": urls
         }
