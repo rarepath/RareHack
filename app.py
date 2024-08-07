@@ -4,8 +4,7 @@ from flask_cors import CORS, cross_origin
 import time
 import os
 from query_processing.query_processor import process_query
-logging.basicConfig(level=logging.DEBUG)
-
+log.setLevel(logging.ERROR)
 # initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
