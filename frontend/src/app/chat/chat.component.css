@@ -86,6 +86,7 @@ body, html {
     word-wrap: break-word; /* Ensure text wraps properly */
     display: inline-block; /* Keep inline display */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    text-align: center;
 }
 
 .template-questions p {
