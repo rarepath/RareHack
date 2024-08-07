@@ -45,10 +45,10 @@
                     </div>
                 </ng-container>
                 
-                <div class="messages" [ngClass]="{'single-message': messages.length === 1}">
+                <div class="messages">
                     <div *ngFor="let message of messages" class="response-item" [ngClass]="{'user-message': message.sender === 'user', 'chatbot-message': message.sender !== 'user'}">
                         <div *ngFor="let response of message.text" class="response">
-                            <p [innerHTML]="response" id="agentResponse"></p>
+                            <p [innerHTML]="response"></p>
                         </div>
                     </div>
                     <!-- Typing Bubble -->

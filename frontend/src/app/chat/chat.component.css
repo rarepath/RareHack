@@ -137,15 +137,10 @@ body, html {
     bottom: 0;
     left: 30%;
     padding: 10px;
-    /* border-top: 1px solid #ddd;
-    background: #fff; */
     display: flex;
     align-items: center;
-    /* padding: 100px; */
-    /* border-width: 100px; */
-
-
 }
+
 @media (min-width: 800px) {
     .user-box {
         max-width: 800px;
@@ -157,14 +152,14 @@ body, html {
 .user-box textarea {
     resize: none; /* Disable textarea resizing */
     border: none; /* Remove border */
-    width: calc(100% - 100px);
+    width: calc(100% - 100px); /* Adjust width */
     padding: 10px;
     border-radius: 5px 5px 0 5px;
     outline: none;
     font-size: 14px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
-    height: 40px; /* Ensure single-line height */
-    overflow: hidden; /* Prevents multi-line display */
+    height: 40px; /* Set fixed height */
+    overflow: hidden; /* Prevent multi-line display */
 }
 
 .user-box button {
