@@ -9,7 +9,7 @@ import boto3
 import json
 
 bedrock_client = boto3.client("bedrock-runtime")
-modelId = 'meta.llama3-1-8b-instruct-v1:0'
+modelId = 'meta.llama3-1-70b-instruct-v1:0'
 accept = 'application/json'
 contentType = 'application/json'
 
