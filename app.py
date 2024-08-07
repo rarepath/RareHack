@@ -4,6 +4,7 @@ from flask_cors import CORS, cross_origin
 import time
 import os
 from query_processing.query_processor import process_query
+log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 # initialize Flask app
 app = Flask(__name__)
