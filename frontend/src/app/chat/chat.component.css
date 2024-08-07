@@ -75,25 +75,22 @@ body, html {
 
 /* Template Questions Styling */
 .template-questions {
-
-    margin: 20px;
-    padding: 20px;
-
-    
-    border-radius: 15px; /* Rounded corners */
-    background-color: #dd5f0d; /* Bright orange background */
+    margin: 10px; /* Decrease margin for closer spacing */
+    padding: 10px; /* Reduce padding for smaller size */
+    border-radius: 10px; /* Adjust rounded corners */
+    background-color: #dd5f0d; /* Keep bright orange background */
     color: #fff; /* White text for contrast */
-    font-size: 18px; /* Larger font size for visibility */
+    font-size: 16px; /* Adjust font size for balance */
     font-weight: bold; /* Bold text for emphasis */
-    max-width: 80%;
-    word-wrap: break-word;
-    display: inline-block;
+    max-width: 70%; /* Adjust maximum width for better proportion */
+    word-wrap: break-word; /* Ensure text wraps properly */
+    display: inline-block; /* Keep inline display */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
 .template-questions p {
-    margin: 10px;
-    text-align: center;
+    margin: 5px; /* Adjust margin inside the box */
+    text-align: center; /* Center text */
 }
 
 /* Message bubbles styling */
