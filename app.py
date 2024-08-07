@@ -18,9 +18,6 @@ def get_response():
     user_input = request.json['userQuery']
     current_summary = request.json['currentSummary']
 
-    # response: [gpt_response, llama_response, summary]
-    # model response object: {"agentName": "", "agentResp": "", "urls": [], "summary": ""}
-
 
     chatbot_response = process_query(user_input, model_selection, current_summary)
 
