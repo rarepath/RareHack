@@ -75,23 +75,29 @@ body, html {
 
 /* Template Questions Styling */
 .template-questions {
-    margin: 10px; /* Decrease margin for closer spacing */
-    padding: 10px; /* Reduce padding for smaller size */
-    border-radius: 10px; /* Adjust rounded corners */
+    display: inline-block;
+    width: 45%; /* Adjust width as needed */
+    margin: 10px; /* Margin between buttons */
+}
+
+.template-questions .btn {
+    width: 100%;
+    height: 80px; /* Fixed height */
+    padding: 10px;
     background-color: #dd5f0d; /* Keep bright orange background */
     color: #fff; /* White text for contrast */
     font-size: 16px; /* Adjust font size for balance */
     font-weight: bold; /* Bold text for emphasis */
-    max-width: 70%; /* Adjust maximum width for better proportion */
-    word-wrap: break-word; /* Ensure text wraps properly */
-    display: inline-block; /* Keep inline display */
+    border-radius: 10px; /* Adjust rounded corners */
+    text-align: center; /* Center text */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.template-questions p {
-    margin: 5px; /* Adjust margin inside the box */
-    text-align: center; /* Center text */
+.template-questions .btn:hover {
+    background-color: #e76b27;
 }
 
 /* Message bubbles styling */
@@ -134,7 +140,7 @@ body, html {
 .user-box {
     width: 100%;
     max-width: 1000px;
-    position:fixed;
+    position: fixed;
     bottom: 0;
     left: 30%;
     padding: 10px;

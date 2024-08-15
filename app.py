@@ -4,15 +4,13 @@ from flask_cors import CORS, cross_origin
 import time
 import os
 from query_processing.query_processor import process_query
-logging.basicConfig(level=logging.DEBUG)
-
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 # initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-# CORS(app, supports_credentials=True, origins=["https://localhost:4200"])
 
-@app.route('/get_response', methods=['POST', 'OPTIONS'])
-# @cross_origin(origin='http://localhost:4200', supports_credentials=True)  # Ensure correct origin
+@app.route('/get_response', methods=['POST'])
 def get_response():
     model_selection = request.json['modelSelection']
     user_input = request.json['userQuery']
@@ -41,7 +39,7 @@ def get_response():
         llama_response = chatbot_response[0]
         urls = chatbot_response[1]
         llama_resp_obj = {
-        "agentName": "LLaMa-3",
+        "agentName": "LLaMa 3.1",
         "agentResponse": llama_response,
         "urls": urls
         }
@@ -60,7 +58,7 @@ def get_response():
         "urls": urls
         } 
         llama_resp_obj = {
-        "agentName": "LLaMa-3",
+        "agentName": "LLaMa 3.1",
         "agentResponse": llama_response,
         "urls": urls
         }
