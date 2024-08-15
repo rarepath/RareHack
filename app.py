@@ -9,10 +9,8 @@ log.setLevel(logging.ERROR)
 # initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-# CORS(app, supports_credentials=True, origins=["https://localhost:4200"])
 
-@app.route('/get_response', methods=['POST', 'OPTIONS'])
-# @cross_origin(origin='http://localhost:4200', supports_credentials=True)  # Ensure correct origin
+@app.route('/get_response', methods=['POST'])
 def get_response():
     model_selection = request.json['modelSelection']
     user_input = request.json['userQuery']
