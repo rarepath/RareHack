@@ -12,61 +12,25 @@ app.secret_key = os.urandom(24)
 
 @app.route('/get_response', methods=['POST'])
 def get_response():
-    model_selection = request.json['modelSelection']
     user_input = request.json['userQuery']
     current_summary = request.json['currentSummary']
 
 
-    chatbot_response = process_query(user_input, model_selection, current_summary)
+    chatbot_response = process_query(user_input, current_summary)
 
-    if model_selection == "gpt":
-        gpt_response = chatbot_response[0]
-        urls = chatbot_response[1]
-        gpt_resp_obj = {
-        "agentName": "GPT-4o",
-        "agentResponse": gpt_response,
-        "urls": urls
-        } 
 
-        summary = chatbot_response[2]
+    llama_response = chatbot_response[0]
+    urls = chatbot_response[1]
+    llama_resp_obj = {
+    "agentName": "LLaMa 3.1",
+    "agentResponse": llama_response,
+    "urls": urls
+    }
+    summary = chatbot_response[2]
 
-        rlist = [gpt_resp_obj, summary]
-        response = jsonify(rlist)
-        return response
-    
-
-    elif model_selection == "llama":
-        llama_response = chatbot_response[0]
-        urls = chatbot_response[1]
-        llama_resp_obj = {
-        "agentName": "LLaMa 3.1",
-        "agentResponse": llama_response,
-        "urls": urls
-        }
-        summary = chatbot_response[2]
-
-        rlist = [llama_resp_obj, summary]
-        response = jsonify(rlist)
-        return response
-    else:
-        gpt_response = chatbot_response[0]
-        llama_response = chatbot_response[1]
-        urls = chatbot_response[2]
-        gpt_resp_obj = {
-        "agentName": "GPT-4o",
-        "agentResponse": gpt_response,
-        "urls": urls
-        } 
-        llama_resp_obj = {
-        "agentName": "LLaMa 3.1",
-        "agentResponse": llama_response,
-        "urls": urls
-        }
-        summary = chatbot_response[3]
-
-        rlist = [gpt_resp_obj, llama_resp_obj, summary]
-        response = jsonify(rlist)
-        return response
+    rlist = [llama_resp_obj, summary]
+    response = jsonify(rlist)
+    return response
 
 
 

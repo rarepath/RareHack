@@ -11,7 +11,7 @@ export class ChatService {
 
     constructor(private http: HttpClient){}
 
-    sendMessage(messagePayload: { userQuery: string, modelSelection: string, currentSummary: string }): Observable<any> {
+    sendMessage(messagePayload: { userQuery: string,  currentSummary: string }): Observable<any> {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.post<any>(this.apiUrl + '/get_response', messagePayload, { headers });
       }

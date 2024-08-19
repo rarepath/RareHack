@@ -13,7 +13,6 @@ import { CommonModule } from '@angular/common';
 })
 export class ChatComponent implements AfterViewChecked {
     userInput: string = '';
-    modelSelection: string = 'both';
     currentSummary: string = '';
     isThinking: boolean = false;
     messages: { sender: string, text: string[] }[] = [];
@@ -31,7 +30,6 @@ export class ChatComponent implements AfterViewChecked {
         this.userInput = '';
         const messagePayload = {
             userQuery: userInput,
-            modelSelection: this.modelSelection,
             currentSummary: this.currentSummary 
         };
 
@@ -72,9 +70,7 @@ export class ChatComponent implements AfterViewChecked {
         textarea.style.height = `${textarea.scrollHeight}px`;
     }
 
-    updateModelSelection(event: any) {
-        this.modelSelection = event.target.value;
-    }
+ 
 
     newChat(): void {
         this.isThinking = false;

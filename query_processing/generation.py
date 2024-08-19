@@ -78,7 +78,7 @@ def generate_llama(query, context, summary):
 
 
     formatted_input = llama_prompt.format(question=query, context=context, summary=summary)
-
+    
     body = json.dumps({
         "prompt": formatted_input,
         "temperature": 0.1,

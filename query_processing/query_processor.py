@@ -3,12 +3,12 @@
 from query_processing.query_expansion import get_expanded_queries, decorate_query
 from query_processing.database_retrieval import embed_query, get_documents
 from query_processing.reranker import MaxSimReranker
-from query_processing.generation import generate_gpt, generate_llama
+from query_processing.generation import generate_llama
 
 from query_processing.summarizer import summarize
 
 hallucination_response = "I'm sorry, I don't have enough information to answer that question."
-def process_query(query, model_selection, summary=''):
+def process_query(query, summary=''):
     # Step 1: Query Expansion
     decorated_query = decorate_query(query)
     expanded_queries = get_expanded_queries(decorated_query)
@@ -34,31 +34,12 @@ def process_query(query, model_selection, summary=''):
         urls = [doc[1]['URL'] for doc in ranked_documents[:3]]
     except:
         urls = []
-    if model_selection == "gpt":
-        gpt_response = generate_gpt(decorated_query, ranked_documents[:3], summary)
-        print("Generating GPT Response")
+    llama_response = generate_llama(decorated_query, ranked_documents[:3], summary)
+    print("Generating LLAMA Response")
 
-        summary = summarize(decorated_query, gpt_response)
-        return [gpt_response, urls, decorated_query + summary]
-
-    elif model_selection == "llama":
-        llama_response = generate_llama(decorated_query, ranked_documents[:3], summary)
-        print("Generating LLAMA Response")
-
-        summary = summarize(decorated_query, llama_response)
-        return [llama_response, urls, decorated_query + summary]
+    summary = summarize(decorated_query, llama_response)
+    return [llama_response, urls, decorated_query + summary]
     
-    else:
-        gpt_response = generate_gpt(decorated_query, ranked_documents[:3], summary)
-        print("Generating GPT Response")
-
-        llama_response = generate_llama(decorated_query, ranked_documents[:3], summary)
-        print("Generating LLAMA Response")
-
-        summary = summarize(decorated_query, llama_response)
-        return [gpt_response, llama_response, urls, decorated_query + summary]
-
-
 
 
 
