@@ -52,6 +52,21 @@ body, html {
     color: black;
 }
 
+.sidebar-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.sidebar-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.sidebar-link a:hover {
+    text-decoration: underline;
+}
+
+
 /* New styles for vertical radio buttons */
 .tw-toggle label {
     display: block; /* Makes each label take up the full width */
