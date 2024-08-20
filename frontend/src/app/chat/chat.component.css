@@ -26,7 +26,6 @@ body, html {
     border-bottom-right-radius: 3%;
     color: #fff; /* Text color */
     padding: 20px;
-    height: 100vh;
 }
 
 .sidebar .logo {
@@ -54,9 +53,9 @@ body, html {
 }
 
 .sidebar-link {
-    margin-top: auto;
+    margin-top: 100%;
     text-align: center;
-    
+
 }
 
 .sidebar-link a {
@@ -67,6 +66,7 @@ body, html {
 .sidebar-link a:hover {
     text-decoration: underline;
 }
+
 
 
 /* New styles for vertical radio buttons */
