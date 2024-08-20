@@ -53,8 +53,9 @@ body, html {
 }
 
 .sidebar-link {
-    margin-top: 20px;
+    margin-top: auto;
     text-align: center;
+    
 }
 
 .sidebar-link a {
