@@ -11,9 +11,7 @@ import { Router } from '@angular/router';
 export class WhitepaperComponent {
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    this.openPdf();  // Automatically open PDF on component load
-  }
+
 
   
   openPdf(): void {
