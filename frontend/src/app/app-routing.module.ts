@@ -9,7 +9,7 @@ export const routes: Routes = [
     { path: 'chat', component: ChatComponent },
     // { path: 'about-us', component: AboutUsComponent},
     { path: 'whitepaper', component: WhitepaperComponent},
-    {path: '**', redirectTo: '/home', pathMatch: 'full'}
+    {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
 @NgModule({
