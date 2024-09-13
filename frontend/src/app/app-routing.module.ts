@@ -8,8 +8,9 @@ import { WhitepaperComponent } from './whitepaper/whitepaper.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'chat', component: ChatComponent },
-    { path: 'about-us', component: AboutUsComponent},
-    { path: 'whitepaper', component: WhitepaperComponent}
+    // { path: 'about-us', component: AboutUsComponent},
+    { path: 'whitepaper', component: WhitepaperComponent},
+    {path: ''}
 ];
 
 @NgModule({

@@ -1,61 +1,61 @@
 .pdf-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    align-items: center;
-    margin-top: 10px;
-  }
-  
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pdf-iframe {
+  width: 100%; /* Make the iframe take up the full width */
+  height: 800px; /* Default height */
+  max-width: 1000px; /* Limit the maximum width to 1000px for larger screens */
+  border: none;
+}
+
+.download-container {
+  margin-top: 20px;
+}
+
+.download-button {
+  background-color: #dd5f0d; /* OSU orange background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding around the text */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth hover transition */
+}
+
+.download-button:hover {
+  background-color: #b84c0f; /* Darker orange on hover */
+}
+
+@media screen and (max-width: 768px) {
   .pdf-iframe {
-    width: 100%; /* Make the iframe take up the full width */
-    height: 800px; /* Default height */
-    max-width: 1000px; /* Limit the maximum width to 1000px for larger screens */
-    border: none;
-  }
-  
-  .download-container {
-    margin-top: 20px;
-  }
-  
-  .download-button {
-    background-color: #dd5f0d; /* OSU orange background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Padding around the text */
-    text-decoration: none; /* Remove underline */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s; /* Smooth hover transition */
-  }
-  
-  .download-button:hover {
-    background-color: #b84c0f; /* Darker orange on hover */
+    height: 70vh; /* Make iframe take 70% of the viewport height on tablets */
   }
 
-  @media screen and (max-width: 768px) {
-    .pdf-iframe {
-      height: 70vh; /* Make iframe take 70% of the viewport height on tablets */
-    }
-  
-    .download-button {
-      font-size: 14px; /* Adjust button font size for smaller screens */
-      padding: 8px 16px; /* Reduce button padding */
-    }
+  .download-button {
+    font-size: 14px; /* Adjust button font size for smaller screens */
+    padding: 8px 16px; /* Reduce button padding */
   }
-  
-  /* Full height iframe for mobile devices */
-  @media screen and (max-width: 480px) {
-    .pdf-container {
-      height: 90vh; /* Make the container fill the full viewport height */
-      margin: 0; /* Remove margin to maximize space */
-    }
-  
-    .pdf-iframe {
-      height: calc(100vh - 60px); /* Full height minus space for the download button */
-    }
-  
-    .download-button {
-      font-size: 12px; /* Adjust button font size for smaller screens */
-      padding: 6px 12px; /*Reduce button padding further */
-    }
+}
+
+/* Full height iframe for mobile devices */
+@media screen and (max-width: 480px) {
+  .pdf-container {
+    height: 90vh; /* Make the container fill the full viewport height */
+    margin: 0; /* Remove margin to maximize space */
   }
+
+  .pdf-iframe {
+    height: calc(100vh - 40px); /* Full height minus space for the download button */
+  }
+
+  .download-button {
+    font-size: 12px; /* Adjust button font size for smaller screens */
+    padding: 6px 12px; /*Reduce button padding further */
+  }
+}
