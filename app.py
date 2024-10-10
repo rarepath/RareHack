@@ -10,7 +10,7 @@ log.setLevel(logging.ERROR)
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-@app.route('/get_response', methods=['POST'])
+@app.route('/conversation', methods=['POST'])
 def get_response():
     model_selection = request.json['modelSelection']
     user_input = request.json['userQuery']
