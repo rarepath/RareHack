@@ -67,7 +67,7 @@ def get_response():
         }
         summary = chatbot_response[3]
 
-        rlist = [gpt_resp_obj, llama_resp_obj, summary]
+        rlist = {"data":[gpt_resp_obj, llama_resp_obj], "currentSummary": summary}
         response = jsonify(rlist)
         return response
 
