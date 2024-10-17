@@ -72,8 +72,27 @@ body, html {
 }
 
 /* Media query for smaller screens */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .background-wrapper {
         background-size: cover; /* Ensure the image fits within the container */
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .container-lg {
+        padding: 10px;
+    }
+
+    .container-lg h1 {
+        font-size: 24px;
+    }
+
+    .container-lg p {
+        font-size: 14px;
+    }
+
+    .container-lg button {
+        padding: 8px 16px;
+        font-size: 14px;
     }
 }

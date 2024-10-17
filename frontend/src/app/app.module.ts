@@ -7,13 +7,15 @@ import { ChatComponent } from './chat/chat.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SurveyComponent } from './survey/survey.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
-    HomeComponent
+    HomeComponent,
+    SurveyComponent
   ],
   imports: [
     BrowserModule,

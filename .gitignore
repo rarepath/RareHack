@@ -1,5 +1,6 @@
 venv
 chromadb
+ui
 *.log
 __pycache__
 rare-hack-env
@@ -36,3 +37,6 @@ testem.log
 # System files
 *.DS_Store
 *Thumbs.db
+
+# Ignore credentials
+credentials.json

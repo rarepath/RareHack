@@ -2,10 +2,10 @@
 body, html {
     height: 100%;
     font-family: Arial, sans-serif;
-    background-color: rgb(246, 179, 179); /* Light gray background */
+    background-color: rgb(75, 75, 75); /* Consistent dark background */
+    margin: 0;
+    overflow: hidden;
 }
-
-
 
 .container-fluid {
     display: flex;
@@ -14,10 +14,10 @@ body, html {
 }
 
 .row {
-    flex: 1; /* Make the row fill remaining vertical space */
+    flex: 1;
     display: flex;
     overflow: hidden; /* Hide overflow from sidebar and main content */
-    background-color:  rgb(75, 75, 75);
+    background-color: rgb(75, 75, 75); /* Consistent background */
 }
 
 .sidebar {
@@ -34,7 +34,6 @@ body, html {
     margin-bottom: 20px;
     text-align: center;
     margin-top: 50px;
-
 }
 
 .sidebar button {
@@ -53,76 +52,98 @@ body, html {
     color: black;
 }
 
+.sidebar-link {
+    margin-top: 100%;
+    text-align: center;
+
+}
+
+.sidebar-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.sidebar-link a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* New styles for vertical radio buttons */
+.tw-toggle label {
+    display: block; /* Makes each label take up the full width */
+    margin-bottom: 10px; /* Adds spacing between the labels */
+}
+
+/* Chat area styling */
 .chat-area {
+    flex: 1;
     overflow-y: auto; /* Enable vertical scrolling */
-    margin-top: 150px;
-    width: 100%;
-}
-
-.example-btn {
-    width: 75%;
-}
-
-.btn {
-    width: 95%;
-}
-
-.buttons {
-    width: 80%;
-    margin: auto;
-    text-align: center;
-    align-items: center;
-    display: flex;
-}
-
-.sd-bar-btn {
-    margin-top: 100px;
-}
-
-.chat-area p {
-    margin-bottom: 10px;
-    text-align: center;
-    color: white;
-    font-size: x-large;
-    margin-bottom: 25px;
-
-}
-
-.chat-area ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    color: white;
-}
-
-.chat-area button {
-    margin-right: 10px;
-    margin-bottom: 10px;
-    background: #dd5f0d;
-    border: 1px solid #dd5f0d;
-    color: white;
-
-}
-
-.chat-area button:hover {
-    color: black;
+    padding: 20px;
+    background-color: rgb(75, 75, 75);
+    margin-bottom: 60px; /* Space for the input box */
 }
 
 .messages {
+    max-height: calc(100vh - 60px); /* Limit height for messages area */
     overflow-y: auto; /* Enable scrolling for messages */
-    max-height: 60vh; /* Limit height for messages area */
-    padding-right: 20px; /* Provide space for scrollbar */
+    padding: 0 20px;
 }
 
-/* Response Item Styles */
+/* Template Questions Styling */
+.template-questions {
+    display: inline-block;
+    width: 45%; /* Adjust width as needed */
+    margin: 10px; /* Margin between buttons */
+}
+
+.template-questions .btn {
+    width: 100%;
+    height: 80px; /* Fixed height */
+    padding: 10px;
+    background-color: #dd5f0d; /* Keep bright orange background */
+    color: #fff; /* White text for contrast */
+    font-size: 16px; /* Adjust font size for balance */
+    font-weight: bold; /* Bold text for emphasis */
+    border-radius: 10px; /* Adjust rounded corners */
+    text-align: center; /* Center text */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.template-questions .btn:hover {
+    background-color: #e76b27;
+}
+
+/* Message bubbles styling */
 .response-item {
     clear: both;
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: 15px; /* Rounded corners for consistency */
     font-size: 14px;
     max-width: 80%; /* Adjust maximum width of the bubble */
+    margin-bottom: 10px;
+    padding: 10px;
     word-wrap: break-word; /* Ensure long words break and wrap */
     display: inline-block; /* Display bubbles inline */
+}
+
+.response-item.user-message {
+    background-color: #dd5f0d; /* User message background color */
+    color: #fff; /* Text color */
+    float: right;
+    text-align: left;
+    border-radius: 15px 15px 0px 15px;
+}
+
+.response-item.chatbot-message {
+    background-color: #f0f0f0; /* Chatbot message background color */
+    color: #000; /* Text color */
+    float: left;
+    text-align: left;
+    border-radius: 15px 15px 15px 0px;
 }
 
 .response-item .text-block {
@@ -130,87 +151,54 @@ body, html {
     max-width: 80%; /* Limit text block width */
     padding: 10px;
     border-radius: 10px;
-
 }
 
-.response-item.user-message {
-    float: right;
-    background-color: darkgray;
-    color: #333;
-    padding: 10px 15px; /* Adjust padding as needed */
-    justify-content: flex-end; /* Align user messages to the right */
-    text-align: right; /* Ensure text within the message is right-aligned */
-    width: auto%;
-    margin-right: 3%;
+/* User input area */
+.user-box {
+    width: 100%;
+    max-width: 1000px;
+    position: fixed;
+    bottom: 0;
+    left: 30%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
 }
 
-.response-item.user-message .text-block {
-    background-color: #dd5f0d; /* User message background color */
-    color: #fff; /* Text color */
-    align-content: end; /* Align user messages to the right */
-
-}
-
-.response-item.chatbot-message {
-    float: left;
-    justify-content: flex-start;
-    overflow: hidden; /* Ensures text doesn't overflow */
-    border-right: 2px solid transparent; /* Creates cursor effect */
-    animation: typing 1s steps(40), blink-caret 0.75s;
-    background-color: black;
-    width: 45%;
-    margin-left: 3%;
-}
-
-@keyframes typing {
-    from {
-      width: 0;
+@media (min-width: 800px) {
+    .user-box {
+        max-width: 800px;
+        left: 50%;
+        transform: translateX(-30%);
     }
-    to {
-      width: 45%;
-    }
-  }
-  
-  @keyframes blink-caret {
-    from, to {
-      border-color: transparent;
-    }
-    50% {
-      border-color: black;
-    }
-  }
-
-.response-item.chatbot-message .text-block {
-    background-color: #f0f0f0; /* Chatbot message background color */
-    color: #000; /* Text color */
-    flex: 1; /* Allow each response to grow and shrink as needed */
-    margin: 5px; /* Add some margin between responses */
 }
 
-.response-item.chatbot-message .response {
-    flex: 1;
-    margin: 5px;
-}
-
-.user-input {
-    border-top: 1px solid #ccc; /* Gray border on top */
-    z-index: 1000; /* Ensure input area is on top */
-    border: 1px solid red;
-
-}
-
-.user-input textarea {
+.user-box textarea {
     resize: none; /* Disable textarea resizing */
     border: none; /* Remove border */
     width: calc(100% - 100px); /* Adjust width */
-    min-height: 50px; /* Minimum height */
-
+    padding: 10px;
+    border-radius: 5px 5px 0 5px;
+    outline: none;
+    font-size: 14px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+    height: 40px; /* Set fixed height */
+    overflow: hidden; /* Prevent multi-line display */
 }
 
-.user-input button {
+.user-box button {
     width: 100px; /* Button width */
+    border: none;
+    background-color: #dd5f0d;
+    color: white;
     border-radius: 0 5px 5px 0; /* Rounded corners */
+    cursor: pointer;
+    font-size: 14px;
+    height: 40px; /* Match height of textarea */
+}
 
+.user-box button:hover {
+    background-color: #e76b27;
 }
 
 /* Typing Bubble Styles */
@@ -220,50 +208,6 @@ body, html {
     font-style: italic;
 }
 
-.col-md-9 {
-    background-color: #5e5c5c;
-    padding: 0;
-}
-
-.user-box {
-    display: flex;
-    width: 90%;
-    display: flex;
-    text-align: center;
-    height: 8%;
-    position: fixed;
-    bottom: 10px;
-    margin: 20px;
-}
-
-.text-box {
-    width: 75%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    height: 90%;
-    vertical-align: middle;
-    
-}
-
-.send-button {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: #dd5f0d;
-    color: white;
-    height: 90%;
-}
-
-.thinking {
-    align-items: flex-start;
-}
-
-.tw-toggle {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-
-/* Media query for smaller screens */
 @media (max-width: 768px) {
     .row {
         flex-direction: column; /* Stack columns on smaller screens */
@@ -273,7 +217,8 @@ body, html {
         width: 100%; /* Full width sidebar */
     }
 
-    .chat-area {
-        flex: 1; /* Expand chat area to fill remaining space */
+    .user-box {
+        width: 100%;
+        border-radius: 0; /* Remove border-radius for full width */
     }
 }
